@@ -16,7 +16,7 @@ final class GitService: GetGitLogin {
     private let baseUrlString = "https://api.github.com/users/"
     private let gitReposSuffix = "/repos"
     
-    var myGitInfo: [MyGitRepos] = []
+    var myGitRepos: [MyGitRepos] = []
     
     var gitLogin = ""
     
@@ -41,8 +41,8 @@ final class GitService: GetGitLogin {
                 do {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    self.myGitInfo = try decoder.decode([MyGitRepos].self, from: data)
-                    completion(.success(self.myGitInfo))
+                    self.myGitRepos = try decoder.decode([MyGitRepos].self, from: data)
+                    completion(.success(self.myGitRepos))
                 } catch {
                     print("Error: \(error)")
                     completion(.failure(CommonError.brokenData(data)))

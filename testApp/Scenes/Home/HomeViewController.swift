@@ -12,9 +12,9 @@ import RealmSwift
 class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITableViewDataSource {
 
 	var presenter: HomePresenter!
-    var gitData: GitUserData = GitUserData.init(gitLogin: "", gitChosenRepo: "")
+    var gitUserData: GitUserData = GitUserData.init(gitLogin: "", gitChosenRepo: "")
     private let kReposCellID = "Cell"
-    private var myGitInfo: [MyGitRepos] = []
+    private var myGitRepos: [MyGitRepos] = []
     var datesAndStars: [DatesAndStars] = []
     private var myRepoStars: [RepoStarsByDates] = []
    
@@ -71,7 +71,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     // MARK: - FactsView
     
     func reloadFactsList(_ factNames: [MyGitRepos]) {
-        myGitInfo = factNames
+        myGitRepos = factNames
         tableView.reloadData()
         
     }
@@ -87,15 +87,13 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     @IBAction func enterBtnTapped(_ sender: UIButton) {
         tableView.isHidden = false
-        gitData.gitLogin = textField.text ?? ""
+        gitUserData.gitLogin = textField.text ?? ""
         tableView.reloadData()
-        presenter.onTextTyped(messageTyped: gitData.gitLogin)
+        presenter.onTextTyped(messageTyped: gitUserData.gitLogin)
         presenter.reloadRepos()
         
-        githubLogin = GithubLogin(gitLogin: gitData.gitLogin)
+        githubLogin = GithubLogin(gitLogin: gitUserData.gitLogin)
         realmGithubLogin = RealmGithubLogin(value: ["gitLogin" : githubLogin.gitLogin])
-//        commitToRealm(object: realmGithubLogin)
-     
     }
     
     func commitToRealm(object: Object) {
@@ -115,12 +113,12 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     // MARK: - UITableViewDataSource/Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        myGitInfo.count
+        myGitRepos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kReposCellID) ?? UITableViewCell(style: .default, reuseIdentifier: kReposCellID)
-        let repo = myGitInfo[indexPath.row]
+        let repo = myGitRepos[indexPath.row]
         cell.textLabel?.text = repo.name
         cell.detailTextLabel?.text = "Количество звезд: \(repo.stargazersCount)"
         
@@ -137,17 +135,19 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         activityIndicatorStart()
+        gitUserData.gitChosenRepo = myGitRepos[indexPath.row].name
         
-        presenter.getDataForSecondVC()
-        print("ГИТ ЛОГИН: \(githubLogin)")
-        print("ГИТ РЕПОЗИТОРИЙ: \(myGitInfo[indexPath.row].name)")
+        presenter.onRepositoryChosen(chosenLogin: gitUserData.gitLogin, chosenRepo: gitUserData.gitChosenRepo)
+        
+        print("ГИТ ЛОГИН: \(gitUserData.gitLogin)")
+        print("ГИТ РЕПОЗИТОРИЙ: \(gitUserData.gitChosenRepo)")
+        
         let realm = try! Realm()
         let githubRepository = realm.objects(RealmGithubRepository.self)
         var realmGithubRepository = githubRepository[indexPath.row]
-//        for i in 0..<myGitInfo.count {
-//            githubStarDates = GithubStarDates(starDatesID: myGitInfo[i].nodeId, dates: myGitInfo[i].)
+//        for i in 0..<myGitRepos.count {
+//            githubStarDates = GithubStarDates(starDatesID: myGitRepos[i].nodeId, dates: myGitRepos[i].)
 //            try! realm.write {
 //                let realmGithubStarDates = realm.create(RealmGithubStarDates.self, value: ["starDatesID" : githubStarDates.starDatesID, "dates" : githubStarDates.dates], update: .all)
 //                realmGithubRepository.starDates.append(realmGithubStarDates)

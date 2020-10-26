@@ -59,14 +59,18 @@ final class HomePresenter {
         reloadRepos()
     }
     
-    func getDataForSecondVC() {
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
-                onPathComponentsReceived(login: receivedGitLogin, repo: receivedGitRepo)
-                dispatchGroup.leave()
-        dispatchGroup.notify(queue: .main) {
-                    self.reloadStarDates()
-                }
+    func onRepositoryChosen(chosenLogin: String, chosenRepo: String) {
+        receivedGitLogin = chosenLogin
+        receivedGitRepo = chosenRepo
+        gitStarService.getGitRepoData(login: receivedGitLogin, repo: receivedGitRepo)
+        
+//        let dispatchGroup = DispatchGroup()
+//        dispatchGroup.enter()
+//                onPathComponentsReceived(login: receivedGitLogin, repo: receivedGitRepo)
+//                dispatchGroup.leave()
+//        dispatchGroup.notify(queue: .main) {
+//                    self.reloadStarDates()
+//                }
     }
     
     func onTextTyped(messageTyped: String) {
@@ -81,11 +85,11 @@ final class HomePresenter {
         navigator.toDetails(receivedDatesAndStars: datesAndStars, ofGitData: repo, gitLogin: gitLoginEntered)
     }
     
-    func onPathComponentsReceived(login: String, repo: String) {
-        let receivedLogin = login
-        let receivedRepo = repo
-        gitStarService.getGitRepoData(login: receivedLogin, repo: receivedRepo)
-    }
+//    func onPathComponentsReceived(login: String, repo: String) {
+//        let receivedLogin = login
+//        let receivedRepo = repo
+//        gitStarService.getGitRepoData(login: receivedLogin, repo: receivedRepo)
+//    }
 
     
     // MARK: - Internal actions
@@ -95,9 +99,9 @@ final class HomePresenter {
             switch $0 {
             case .failure(_):
                 break
-            case .success(let myGitInfo):
+            case .success(let myGitRepos):
                 DispatchQueue.main.async {
-                    self?.showRepos(myGitInfo)
+                    self?.showRepos(myGitRepos)
                 }
             }
         }
