@@ -16,17 +16,17 @@ final class SecondConfigurator {
     
     private let storyboard = UIStoryboard(name: "Second", bundle: nil)
     private var navigationController: UINavigationController
-//    private var receivedGitRepo: String
-//    private var receivedGitLogin: String
-    private var datesAndStars: [DatesAndStars] = []
+    private var receivedGitRepo: String
+    private var receivedGitLogin: String
+    private var datesAndStars: [DatesAndStars]
     
     // MARK: - Lifecycle
     
-    init(navigationController: UINavigationController, datesAndStars: [DatesAndStars]) {
+    init(navigationController: UINavigationController, datesAndStars: [DatesAndStars], receivedGitRepo: String, receivedGitLogin: String) {
         self.navigationController = navigationController
         self.datesAndStars = datesAndStars
-//        self.receivedGitRepo = receivedGitRepo
-//        self.receivedGitLogin = receivedGitLogin
+        self.receivedGitRepo = receivedGitRepo
+        self.receivedGitLogin = receivedGitLogin
     }
     
     // MARK: - Configuration
@@ -34,11 +34,19 @@ final class SecondConfigurator {
     func configure() -> UIViewController {
         let vc = storyboard.instantiateViewController(identifier: "SecondViewController") as! SecondViewController
         let navigator = DefaultSecondNavigator(navigationController: navigationController)
-        let gitStarService = GitStarService()
-        let starDatesService = StarDatesService()
+//        let gitStarService = GitStarService()
+//        let starDatesService = StarDatesService()
         
-        vc.presenter = SecondPresenter(view: vc, navigator: navigator, datesAndStars: datesAndStars, gitStarService: gitStarService, starDatesService: starDatesService)
-        
+//        vc.presenter = SecondPresenter(view: vc,
+//                                       navigator: navigator,
+//                                       gitStarService: receivedGitRepo,
+//                                       starDatesService: receivedGitLogin,
+//                                       myRepoStars: datesAndStars)
+        vc.presenter = SecondPresenter(view: vc,
+                                       navigator: navigator,
+                                       datesAndStars: datesAndStars,
+                                       receivedGitRepo: receivedGitRepo,
+                                       receivedGitLogin: receivedGitLogin)
         return vc
     }
 }

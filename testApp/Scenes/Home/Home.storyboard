@@ -17,6 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Usr-2T-eb6">
+                                <rect key="frame" x="147.5" y="293.5" width="80" height="80"/>
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="9Wm-An-w6q"/>
+                                    <constraint firstAttribute="width" constant="80" id="jVu-Oh-UKF"/>
+                                </constraints>
+                                <color key="color" systemColor="systemBlueColor"/>
+                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7GT-3f-lmg">
                                 <rect key="frame" x="16" y="16" width="343" height="82"/>
                                 <subviews>
@@ -76,15 +85,19 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HGg-TW-TCu" firstAttribute="bottom" secondItem="78c-B6-KeD" secondAttribute="bottom" constant="8" id="75R-fV-4M4"/>
+                            <constraint firstItem="Usr-2T-eb6" firstAttribute="centerY" secondItem="zoB-vs-Nea" secondAttribute="centerY" id="IJ8-W8-OlO"/>
                             <constraint firstItem="78c-B6-KeD" firstAttribute="leading" secondItem="HGg-TW-TCu" secondAttribute="leading" constant="16" id="Qvw-S7-XIC"/>
                             <constraint firstItem="7GT-3f-lmg" firstAttribute="leading" secondItem="zoB-vs-Nea" secondAttribute="leading" constant="16" id="RYY-fj-Xl4"/>
                             <constraint firstItem="7GT-3f-lmg" firstAttribute="top" secondItem="HGg-TW-TCu" secondAttribute="top" constant="16" id="VnP-xY-vjk"/>
                             <constraint firstItem="HGg-TW-TCu" firstAttribute="trailing" secondItem="78c-B6-KeD" secondAttribute="trailing" constant="16" id="gil-Mf-1GI"/>
                             <constraint firstItem="78c-B6-KeD" firstAttribute="top" secondItem="7GT-3f-lmg" secondAttribute="bottom" constant="16" id="pf8-9V-rEC"/>
                             <constraint firstItem="HGg-TW-TCu" firstAttribute="trailing" secondItem="7GT-3f-lmg" secondAttribute="trailing" constant="16" id="pl3-cG-v2a"/>
+                            <constraint firstItem="Usr-2T-eb6" firstAttribute="centerX" secondItem="zoB-vs-Nea" secondAttribute="centerX" id="s8B-2C-qHK"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Usr-2T-eb6" id="XV2-FZ-dQT"/>
+                        <outlet property="enterButton" destination="ojF-OX-KKg" id="qqH-HE-XZO"/>
                         <outlet property="tableView" destination="78c-B6-KeD" id="L5s-SH-Gv4"/>
                         <outlet property="textField" destination="loJ-Fx-KOI" id="1D7-vn-dKg"/>
                     </connections>
@@ -97,6 +110,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

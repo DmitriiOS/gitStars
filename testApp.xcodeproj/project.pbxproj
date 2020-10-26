@@ -56,8 +56,8 @@
 		6390461D25304FA500A923AC /* GitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitService.swift; sourceTree = "<group>"; };
 		63E02A1725344B5C00B3E5C6 /* RepoStarsByDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStarsByDates.swift; sourceTree = "<group>"; };
 		63E02A1A25344D6700B3E5C6 /* GitStarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitStarService.swift; sourceTree = "<group>"; };
+		9E17DB592546AB4300F56DB5 /* testApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "testApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		9E3014582535E5E500C21320 /* DatesAndStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesAndStars.swift; sourceTree = "<group>"; };
-		9E3EADA8253849580077E9C3 /* -Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "-Bridging-Header.h"; sourceTree = "<group>"; };
 		9E751B9E253EF6750032FD2F /* RealmModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		9EC0806C2535AA4300080198 /* StarDatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarDatesService.swift; sourceTree = "<group>"; };
 		C1062494B7D60E9E23F9CAF0 /* Pods-testApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.release.xcconfig"; path = "Target Support Files/Pods-testApp/Pods-testApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		6382BB7E252C5B00003DEFB6 = {
 			isa = PBXGroup;
 			children = (
-				9E3EADA8253849580077E9C3 /* -Bridging-Header.h */,
+				9E17DB592546AB4300F56DB5 /* testApp-Bridging-Header.h */,
 				6382BB89252C5B00003DEFB6 /* testApp */,
 				6382BB88252C5B00003DEFB6 /* Products */,
 				312A11EA641DB25416D7917C /* Pods */,
@@ -420,7 +420,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "testApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -474,7 +476,9 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "testApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -495,7 +499,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.DmitriOS.testApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -516,7 +520,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.DmitriOS.testApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

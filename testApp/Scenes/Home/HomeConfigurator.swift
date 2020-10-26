@@ -25,9 +25,16 @@ final class HomeConfigurator {
         let navigationController = UINavigationController(rootViewController: vc)
         let navigator = DefaultHomeNavigator(navigationController: navigationController)
         let gitService = GitService()
+        let gitStarService = GitStarService()
+        let starDatesService = StarDatesService()
 
         
-        vc.presenter = HomePresenter(view: vc, navigator: navigator, gitService: gitService)
+//        vc.presenter = HomePresenter(view: vc, navigator: navigator, gitService: gitService)
+        vc.presenter = HomePresenter(view: vc,
+                                     navigator: navigator,
+                                     gitService: gitService,
+                                     gitStarService: gitStarService,
+                                     starDatesService: starDatesService)
         
         return navigationController
     }

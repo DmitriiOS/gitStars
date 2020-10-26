@@ -14,15 +14,15 @@ import RealmSwift
 class SecondViewController: UIViewController, SecondView {
     
     var datesForChart: [String] = []
+    var startDateDate = Date()
+    var endDateDate = Date()
+    var presenter: SecondPresenter!
+    var starDatesService: StarDatesService!
+    var datesAndStars: [DatesAndStars] = []
+    private var myRepoStars: [RepoStarsByDates] = []
     
-
-//    let githubLogin = RealmGithubLogin()
-//    var realmGithubRepository = RealmGithubRepository()
-//    var githubStarDates = RealmGithubStarDates()
-    
-    
+    var barChartDataEntry: [BarChartDataEntry] = []
     lazy var barChartView: BarChartView = {
-        
         let chartView = BarChartView()
         chartView.translatesAutoresizingMaskIntoConstraints = false
         chartView.backgroundColor = .systemBackground
@@ -35,72 +35,49 @@ class SecondViewController: UIViewController, SecondView {
     @IBOutlet weak var selectedDatesLabel: UILabel!
     @IBOutlet weak var chartView: UIView!
     @IBOutlet weak var secondLabel: UILabel!
-    
-    var startDateDate = Date()
-    var endDateDate = Date()
-    
-    var presenter: SecondPresenter!
-    var starDatesService: StarDatesService!
-    
-//    var realmGithubStarDates = RealmGithubStarDates()
-    
-    var datesAndStars: [DatesAndStars] = []
-    private var myRepoStars: [RepoStarsByDates] = []
-    var barChartDataEntry: [BarChartDataEntry] = []
 
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-            chartView.addSubview(barChartView)
-            prepareUI()
-        
+        chartView.addSubview(barChartView)
+        prepareUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        activityIndicatorStart()
-
+//        activityIndicatorStart()
         presenter.viewWillAppear()
         getDatesForChart()
         barChartView.xAxis.enabled = true
         barChartView.xAxis.wordWrapEnabled = true
         barChartView.xAxis.drawLabelsEnabled = true
         barChartView.xAxis.labelPosition = .bottom
-
         barChartView.xAxis.granularity = 1
-        
         print("ДАТЫ ДЛЯ ГРАФИКА: \(datesForChart)")
-
     }
     
-    func activityIndicatorStart() {
-        activityIndicator.startAnimating()
-        selectedDatesLabel.isHidden = true
-        chartView.isHidden = true
-        selectDatesBtn.isHidden = true
-    }
-    
-    func activityIndicatorStop() {
-        activityIndicator.stopAnimating()
-        selectedDatesLabel.isHidden = false
-        chartView.isHidden = false
-        selectDatesBtn.isHidden = false
-    }
+//    func activityIndicatorStart() {
+//        activityIndicator.startAnimating()
+//        selectedDatesLabel.isHidden = true
+//        chartView.isHidden = true
+//        selectDatesBtn.isHidden = true
+//    }
+//
+//    func activityIndicatorStop() {
+//        activityIndicator.stopAnimating()
+//        selectedDatesLabel.isHidden = false
+//        chartView.isHidden = false
+//        selectDatesBtn.isHidden = false
+//    }
     
     func getDatesForChart() {
         let dateFormatter = DateFormatter()
-        
         for i in 0..<datesAndStars.count {
             let date = datesAndStars[i].dates
-            
             dateFormatter.dateFormat = "dd.MM.yyyy"
             dateFormatter.locale = Locale(identifier: "ru_Ru")
-            
             let newDate = dateFormatter.string(from: date)
-
             datesForChart.append(newDate)
         }
     }
@@ -157,8 +134,8 @@ class SecondViewController: UIViewController, SecondView {
     func reloadRepoStars(_ myRepoStars: [RepoStarsByDates]) {
         self.myRepoStars = myRepoStars
         
-        datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
-        activityIndicatorStop()
+//        datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
+//        activityIndicatorStop()
         selectedDatesLabel.text = "Выберите даты для графика"
 
     }
