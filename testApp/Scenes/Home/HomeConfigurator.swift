@@ -28,8 +28,6 @@ final class HomeConfigurator {
         let gitStarService = GitStarService()
         let starDatesService = StarDatesService()
 
-        
-//        vc.presenter = HomePresenter(view: vc, navigator: navigator, gitService: gitService)
         vc.presenter = HomePresenter(view: vc,
                                      navigator: navigator,
                                      gitService: gitService,

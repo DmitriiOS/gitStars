@@ -19,7 +19,7 @@ final class GitStarService: GetGitRepoData {
     
     private let reloadDispatchGroup = DispatchGroup()
     
-    var myRepoStars: [RepoStarsByDates] = []
+    var repoStarsByDates: [RepoStarsByDates] = []
     
     var login = ""
     var repo = ""
@@ -34,12 +34,12 @@ final class GitStarService: GetGitRepoData {
     // MARK: - Actions
 
     func loadRepoDates(completion: @escaping (Result<[RepoStarsByDates], Error>) -> Void) {
-        
+
         var pageNum = 1
         
         while pageNum < 5 {
-            
-            let url = URL(string: "\(baseRepoUrlString)\(login)/\(repo)\(gitRepoSuffix)?page=\(pageNum)&per_page=1000")!
+
+            let url = URL(string: "\(baseRepoUrlString)\(login)/\(repo)\(gitRepoSuffix)?page=\(pageNum)&per_page=100")!
 
             var request = URLRequest(url: url)
             request.addValue("application/vnd.github.v3.star+json", forHTTPHeaderField: "Accept")
@@ -52,12 +52,10 @@ final class GitStarService: GetGitRepoData {
                     completion(.failure(error))
                 case .success(let data):
                     do {
-    //                    let str = String(data: data, encoding: .utf8)
                         let decoder = JSONDecoder()
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
                         let stars = try decoder.decode([RepoStarsByDates].self, from: data)
-                        self.myRepoStars.append(contentsOf: stars)
-//                        completion(.success(self.myRepoStars))
+                        self.repoStarsByDates.append(contentsOf: stars)
                         print("Loaded")
                     } catch {
                         print("Error: \(error)")
@@ -74,7 +72,7 @@ final class GitStarService: GetGitRepoData {
             print("Next page \(pageNum)")
         }
 
-        completion(.success(self.myRepoStars))
+        completion(.success(self.repoStarsByDates))
         
     }
     

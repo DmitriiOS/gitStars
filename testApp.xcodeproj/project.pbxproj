@@ -27,6 +27,7 @@
 		63E02A1825344B5C00B3E5C6 /* RepoStarsByDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E02A1725344B5C00B3E5C6 /* RepoStarsByDates.swift */; };
 		63E02A1B25344D6700B3E5C6 /* GitStarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E02A1A25344D6700B3E5C6 /* GitStarService.swift */; };
 		9E3014592535E5E500C21320 /* DatesAndStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3014582535E5E500C21320 /* DatesAndStars.swift */; };
+		9E38911D25482DEC00603CFE /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E38911C25482DEC00603CFE /* RealmService.swift */; };
 		9E751B9F253EF6750032FD2F /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E751B9E253EF6750032FD2F /* RealmModels.swift */; };
 		9EC0806D2535AA4300080198 /* StarDatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0806C2535AA4300080198 /* StarDatesService.swift */; };
 		DF7CA373604A4828F5FEE6C1 /* Pods_testApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DA9FED5E8CB84277EEDEAA /* Pods_testApp.framework */; };
@@ -58,6 +59,7 @@
 		63E02A1A25344D6700B3E5C6 /* GitStarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitStarService.swift; sourceTree = "<group>"; };
 		9E17DB592546AB4300F56DB5 /* testApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "testApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		9E3014582535E5E500C21320 /* DatesAndStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesAndStars.swift; sourceTree = "<group>"; };
+		9E38911C25482DEC00603CFE /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		9E751B9E253EF6750032FD2F /* RealmModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		9EC0806C2535AA4300080198 /* StarDatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarDatesService.swift; sourceTree = "<group>"; };
 		C1062494B7D60E9E23F9CAF0 /* Pods-testApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.release.xcconfig"; path = "Target Support Files/Pods-testApp/Pods-testApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				6390461D25304FA500A923AC /* GitService.swift */,
 				63E02A1A25344D6700B3E5C6 /* GitStarService.swift */,
 				9EC0806C2535AA4300080198 /* StarDatesService.swift */,
+				9E38911C25482DEC00603CFE /* RealmService.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				9E751B9F253EF6750032FD2F /* RealmModels.swift in Sources */,
 				6382BBB8252C7F1C003DEFB6 /* SecondViewController.swift in Sources */,
 				63904619253047CB00A923AC /* MyGitRepos.swift in Sources */,
+				9E38911D25482DEC00603CFE /* RealmService.swift in Sources */,
 				6382BBB6252C7F1C003DEFB6 /* SecondNavigator.swift in Sources */,
 				6382BBB7252C7F1C003DEFB6 /* SecondPresenter.swift in Sources */,
 				6382BBA8252C5BAE003DEFB6 /* HomeConfigurator.swift in Sources */,

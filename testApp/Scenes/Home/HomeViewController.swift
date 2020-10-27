@@ -17,7 +17,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     private var myGitRepos: [MyGitRepos] = []
     var datesAndStars: [DatesAndStars] = []
     private var myRepoStars: [RepoStarsByDates] = []
-   
     var realmGithubLogin = RealmGithubLogin()
     var realmGithubRepository = RealmGithubRepository()
     var realmGithubStarDates = RealmGithubStarDates()
@@ -38,7 +37,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         prepareUI()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
@@ -50,7 +48,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         textField.isEnabled = false
         enterButton.isEnabled = false
         tableView.isHidden = true
-        
     }
     
     func activityIndicatorStop() {
@@ -73,16 +70,13 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     func reloadFactsList(_ factNames: [MyGitRepos]) {
         myGitRepos = factNames
         tableView.reloadData()
-        
     }
     
     // MARK: - Actions
     
     func reloadRepoStars(_ myRepoStars: [RepoStarsByDates]) {
         self.myRepoStars = myRepoStars
-        
         datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
-        activityIndicatorStop()
     }
     
     @IBAction func enterBtnTapped(_ sender: UIButton) {
@@ -91,10 +85,11 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         tableView.reloadData()
         presenter.onTextTyped(messageTyped: gitUserData.gitLogin)
         presenter.reloadRepos()
-        
         githubLogin = GithubLogin(gitLogin: gitUserData.gitLogin)
         realmGithubLogin = RealmGithubLogin(value: ["gitLogin" : githubLogin.gitLogin])
     }
+    
+    // MARK: - commitToRealm func
     
     func commitToRealm(object: Object) {
         do {
@@ -121,7 +116,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         let repo = myGitRepos[indexPath.row]
         cell.textLabel?.text = repo.name
         cell.detailTextLabel?.text = "Количество звезд: \(repo.stargazersCount)"
-        
         githubRepository = GithubRepository(repo: repo)
         let realm = try! Realm()
         try! realm.write {
@@ -129,7 +123,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
             realm.create(RealmGithubRepository.self, value: repository, update: .all)
             realmGithubLogin.repository.append(realmGithubRepository)
         }
-        
         return cell
     }
     
@@ -138,25 +131,32 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         activityIndicatorStart()
         gitUserData.gitChosenRepo = myGitRepos[indexPath.row].name
         
+        let num = indexPath.row
+        
         presenter.onRepositoryChosen(chosenLogin: gitUserData.gitLogin, chosenRepo: gitUserData.gitChosenRepo)
         
-        print("ГИТ ЛОГИН: \(gitUserData.gitLogin)")
-        print("ГИТ РЕПОЗИТОРИЙ: \(gitUserData.gitChosenRepo)")
+        presenter.reloadStarDates()
+        
+        activityIndicatorStop()
         
         let realm = try! Realm()
-        let githubRepository = realm.objects(RealmGithubRepository.self)
-        var realmGithubRepository = githubRepository[indexPath.row]
-//        for i in 0..<myGitRepos.count {
-//            githubStarDates = GithubStarDates(starDatesID: myGitRepos[i].nodeId, dates: myGitRepos[i].)
-//            try! realm.write {
-//                let realmGithubStarDates = realm.create(RealmGithubStarDates.self, value: ["starDatesID" : githubStarDates.starDatesID, "dates" : githubStarDates.dates], update: .all)
-//                realmGithubRepository.starDates.append(realmGithubStarDates)
-//            }
-//        }
         
+        let githubRepository = realm.objects(RealmGithubRepository.self)
+        let realmGithubRepository = githubRepository[num]
+        
+        for i in 0..<myRepoStars.count {
+            githubStarDates = GithubStarDates(starDatesID: myRepoStars[i].user.nodeId, dates: myRepoStars[i].starredAt)
+            try! realm.write {
+                let realmGithubStarDates = realm.create(RealmGithubStarDates.self, value: ["starDatesID" : githubStarDates.starDatesID, "dates" : githubStarDates.dates], update: .all)
+                realmGithubRepository.starDates.append(realmGithubStarDates)
+            }
+        }
         commitToRealm(object: realmGithubLogin)
-        presenter.onRepoSelected(atIndex: indexPath.row, gitLoginEntered: textField.text!)
     }
     
-    
+    func whenAllDataIsReady() {
+        print("ВСЕ ГОТОВО: \(datesAndStars.count)")
+
+        presenter.onRepoSelected(receivedDatesAndStars: datesAndStars, gitRepoEntered: gitUserData.gitChosenRepo, gitLoginEntered: gitUserData.gitLogin)
+    }
 }

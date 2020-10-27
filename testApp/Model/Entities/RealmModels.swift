@@ -40,7 +40,7 @@ extension GithubRepository {
 struct GithubStarDates {
     let starDatesID: String
     let dates: String
-//    let stars: Int
+
 }
 
 extension GithubStarDates {
@@ -63,9 +63,7 @@ class RealmGithubRepository: Object {
     @objc dynamic var repoID = ""
     @objc dynamic var repoName = ""
     @objc dynamic var repoStarsTotal = 0
-//    let gitLogin = LinkingObjects(fromType: RealmGithubLogin.self, property: "repository")
     var starDates = List<RealmGithubStarDates>()
-//    @objc dynamic var gitLogin: RealmGithubLogin?
     override class func primaryKey() -> String? {
         return "repoID"
     }
@@ -85,8 +83,6 @@ extension RealmGithubRepository {
 class RealmGithubStarDates: Object {
     @objc dynamic var starDatesID = ""
     @objc dynamic var dates = ""
-//    @objc dynamic var stars = 0
-    
     override class func primaryKey() -> String? {
         return "starDatesID"
     }

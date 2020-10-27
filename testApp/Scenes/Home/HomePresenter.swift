@@ -11,15 +11,17 @@ import Foundation
 protocol HomeView: AnyObject {
     func reloadFactsList(_ factNames: [MyGitRepos])
     func reloadRepoStars(_ starDates: [RepoStarsByDates])
+    func whenAllDataIsReady()
 }
 
 final class HomePresenter {
-
+    
+    private let reloadDispatchGroup = DispatchGroup()
 	private unowned var view: HomeView
 	private let navigator: HomeNavigator
     private let gitService: GitService
     private var gitStarService: GitStarService
-    private var myRepoStars: [RepoStarsByDates] = []
+    private var repoStarsByDates: [RepoStarsByDates] = []
     var starDatesService: StarDatesService
     private var datesAndStars: [DatesAndStars] = []
     private var repos: [MyGitRepos] = []
@@ -32,23 +34,14 @@ final class HomePresenter {
          navigator: HomeNavigator,
          gitService: GitService,
          gitStarService: GitStarService,
-//         myRepoStars: [RepoStarsByDates],
          starDatesService: StarDatesService
-//         datesAndStars: [DatesAndStars],
-//         repos: [MyGitRepos],
-//         receivedGitRepo: String,
-//         receivedGitLogin: String
+
     ){
 		self.view = view
 		self.navigator = navigator
         self.gitService = gitService
         self.gitStarService = gitStarService
-//        self.myRepoStars = myRepoStars
         self.starDatesService = starDatesService
-//        self.datesAndStars = datesAndStars
-//        self.repos = repos
-//        self.receivedGitRepo = receivedGitRepo
-//        self.receivedGitLogin = receivedGitLogin
 	}
 
 
@@ -63,14 +56,6 @@ final class HomePresenter {
         receivedGitLogin = chosenLogin
         receivedGitRepo = chosenRepo
         gitStarService.getGitRepoData(login: receivedGitLogin, repo: receivedGitRepo)
-        
-//        let dispatchGroup = DispatchGroup()
-//        dispatchGroup.enter()
-//                onPathComponentsReceived(login: receivedGitLogin, repo: receivedGitRepo)
-//                dispatchGroup.leave()
-//        dispatchGroup.notify(queue: .main) {
-//                    self.reloadStarDates()
-//                }
     }
     
     func onTextTyped(messageTyped: String) {
@@ -78,19 +63,9 @@ final class HomePresenter {
         gitService.getGitLogin(login: message)
     }
     
-    func onRepoSelected(atIndex repoIndex: Int, gitLoginEntered: String) {
-        guard repoIndex < repos.count else { return }
-        
-        let repo = repos[repoIndex].name
-        navigator.toDetails(receivedDatesAndStars: datesAndStars, ofGitData: repo, gitLogin: gitLoginEntered)
+    func onRepoSelected(receivedDatesAndStars: [DatesAndStars], gitRepoEntered: String, gitLoginEntered: String) {
+        navigator.toDetails(receivedDatesAndStars: receivedDatesAndStars, ofGitData: gitRepoEntered, gitLogin: gitLoginEntered)
     }
-    
-//    func onPathComponentsReceived(login: String, repo: String) {
-//        let receivedLogin = login
-//        let receivedRepo = repo
-//        gitStarService.getGitRepoData(login: receivedLogin, repo: receivedRepo)
-//    }
-
     
     // MARK: - Internal actions
 
@@ -109,7 +84,6 @@ final class HomePresenter {
     
     private func showRepos(_ repos: [MyGitRepos]) {
         self.repos = repos
-        
         let factNames = repos
         view.reloadFactsList(factNames)
     }
@@ -119,18 +93,18 @@ final class HomePresenter {
             switch $0 {
             case .failure(_):
                 break
-            case .success(let myRepoStars):
+            case .success(let repoStarsByDates):
                 DispatchQueue.main.async {
-                    self?.showRepoStars(myRepoStars)
+                    self?.showRepoStars(repoStarsByDates)
+                    self?.view.whenAllDataIsReady()
                 }
             }
         }
     }
     
     private func showRepoStars(_ dates: [RepoStarsByDates]) {
-        self.myRepoStars = dates
-        
-        let starDates = myRepoStars
+        self.repoStarsByDates = dates
+        let starDates = repoStarsByDates
         view.reloadRepoStars(starDates)
     }
 

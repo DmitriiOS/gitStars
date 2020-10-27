@@ -32,14 +32,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="TI9-Ke-PkT">
-                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="6xb-QB-HtD"/>
-                                    <constraint firstAttribute="height" constant="40" id="js7-b9-MW8"/>
-                                </constraints>
-                                <color key="color" systemColor="systemBlueColor"/>
-                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2k-1j-fYI">
                                 <rect key="frame" x="8" y="101" width="359" height="550"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
@@ -63,7 +55,6 @@
                         <viewLayoutGuide key="safeArea" id="594-nX-ROV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="TI9-Ke-PkT" firstAttribute="centerY" secondItem="264-g3-kky" secondAttribute="centerY" id="146-ux-Gwi"/>
                             <constraint firstItem="594-nX-ROV" firstAttribute="trailing" secondItem="3zA-Nu-f6x" secondAttribute="trailing" constant="8" id="8sh-Pi-TXw"/>
                             <constraint firstItem="sPS-s4-cef" firstAttribute="leading" secondItem="594-nX-ROV" secondAttribute="leading" constant="8" id="BON-5A-dqK"/>
                             <constraint firstItem="R2k-1j-fYI" firstAttribute="leading" secondItem="594-nX-ROV" secondAttribute="leading" constant="8" id="G9X-6w-oLU"/>
@@ -71,7 +62,6 @@
                             <constraint firstItem="594-nX-ROV" firstAttribute="bottom" secondItem="R2k-1j-fYI" secondAttribute="bottom" constant="16" id="PIi-wt-sli"/>
                             <constraint firstItem="594-nX-ROV" firstAttribute="trailing" secondItem="R2k-1j-fYI" secondAttribute="trailing" constant="8" id="WJP-wp-wKo"/>
                             <constraint firstItem="3zA-Nu-f6x" firstAttribute="top" secondItem="SPY-tt-Jif" secondAttribute="bottom" constant="8" id="cHX-he-LsS"/>
-                            <constraint firstItem="TI9-Ke-PkT" firstAttribute="centerX" secondItem="264-g3-kky" secondAttribute="centerX" id="g6G-UB-Iuk"/>
                             <constraint firstItem="SPY-tt-Jif" firstAttribute="top" secondItem="594-nX-ROV" secondAttribute="top" constant="8" id="gxR-st-g5s"/>
                             <constraint firstItem="SPY-tt-Jif" firstAttribute="leading" secondItem="594-nX-ROV" secondAttribute="leading" constant="8" id="kNG-Ko-pBM"/>
                             <constraint firstItem="sPS-s4-cef" firstAttribute="top" secondItem="SPY-tt-Jif" secondAttribute="bottom" constant="8" id="ni0-6l-J7L"/>
@@ -80,7 +70,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="TI9-Ke-PkT" id="c80-8b-WuX"/>
                         <outlet property="chartView" destination="R2k-1j-fYI" id="GGo-F2-vZd"/>
                         <outlet property="secondLabel" destination="SPY-tt-Jif" id="lBa-0r-EcK"/>
                         <outlet property="selectDatesBtn" destination="3zA-Nu-f6x" id="VrK-qH-glh"/>
@@ -99,9 +88,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

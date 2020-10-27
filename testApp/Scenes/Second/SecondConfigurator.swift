@@ -34,14 +34,6 @@ final class SecondConfigurator {
     func configure() -> UIViewController {
         let vc = storyboard.instantiateViewController(identifier: "SecondViewController") as! SecondViewController
         let navigator = DefaultSecondNavigator(navigationController: navigationController)
-//        let gitStarService = GitStarService()
-//        let starDatesService = StarDatesService()
-        
-//        vc.presenter = SecondPresenter(view: vc,
-//                                       navigator: navigator,
-//                                       gitStarService: receivedGitRepo,
-//                                       starDatesService: receivedGitLogin,
-//                                       myRepoStars: datesAndStars)
         vc.presenter = SecondPresenter(view: vc,
                                        navigator: navigator,
                                        datesAndStars: datesAndStars,
