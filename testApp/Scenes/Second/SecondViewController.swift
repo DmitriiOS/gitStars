@@ -47,6 +47,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
+        showReceivedData(repo: receivedRepo, login: receivedLogin)
         getDatesForChart()
         barChartView.xAxis.enabled = true
         barChartView.xAxis.wordWrapEnabled = true
@@ -94,6 +95,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         barChartView.widthAnchor.constraint(equalTo: chartView.widthAnchor).isActive = true
         barChartView.heightAnchor.constraint(equalTo: chartView.heightAnchor).isActive = true
         selectedDatesLabel.text = "Выберите даты для графика"
+
         // Customize UI structure appearance
     }
     
