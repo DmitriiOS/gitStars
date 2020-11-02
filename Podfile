@@ -9,5 +9,6 @@ target 'testApp' do
   pod 'RealmSwift'
   pod 'Charts'
   pod 'CalendarDateRangePickerViewController'
+  pod 'ZippyJSON'
 
 end

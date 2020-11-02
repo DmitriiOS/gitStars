@@ -57,32 +57,6 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         print("ДАТЫ ДЛЯ ГРАФИКА: \(datesForChart)")
     }
     
-    func getDatesForChart() {
-        let dateFormatter = DateFormatter()
-        for i in 0..<datesAndStars.count {
-            let date = datesAndStars[i].dates
-            dateFormatter.dateFormat = "dd.MM.yyyy"
-            dateFormatter.locale = Locale(identifier: "ru_Ru")
-            let newDate = dateFormatter.string(from: date)
-            datesForChart.append(newDate)
-        }
-    }
-    
-    @IBAction func selectDateRangeBtn(_ sender: UIButton) {
-        let firstDate = datesAndStars.first?.dates
-        let lastDate = Date()
-        let dateRangePickerViewController = CalendarDateRangePickerViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        dateRangePickerViewController.delegate = self
-        dateRangePickerViewController.minimumDate = firstDate ?? Date()
-        dateRangePickerViewController.maximumDate = lastDate
-        dateRangePickerViewController.selectedStartDate = firstDate ?? Date()
-        dateRangePickerViewController.selectedEndDate = lastDate
-//        dateRangePickerViewController.selectedColor = UIColor.red
-//        dateRangePickerViewController.titleText = "Select Date Range"
-        let navigationController = UINavigationController(rootViewController: dateRangePickerViewController)
-        self.navigationController?.present(navigationController, animated: true, completion: nil)
-    }
-    
     // MARK: - Setup
     
     private func prepareUI() {
@@ -100,6 +74,32 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     }
     
     // MARK: - Actions
+    
+    @IBAction func selectDateRangeBtn(_ sender: UIButton) {
+        let firstDate = datesAndStars.first?.dates
+        let lastDate = Date()
+        let dateRangePickerViewController = CalendarDateRangePickerViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        dateRangePickerViewController.delegate = self
+        dateRangePickerViewController.minimumDate = firstDate ?? Date()
+        dateRangePickerViewController.maximumDate = lastDate
+        dateRangePickerViewController.selectedStartDate = firstDate ?? Date()
+        dateRangePickerViewController.selectedEndDate = lastDate
+//        dateRangePickerViewController.selectedColor = UIColor.red
+//        dateRangePickerViewController.titleText = "Select Date Range"
+        let navigationController = UINavigationController(rootViewController: dateRangePickerViewController)
+        self.navigationController?.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func getDatesForChart() {
+        let dateFormatter = DateFormatter()
+        for i in 0..<datesAndStars.count {
+            let date = datesAndStars[i].dates
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            dateFormatter.locale = Locale(identifier: "ru_Ru")
+            let newDate = dateFormatter.string(from: date)
+            datesForChart.append(newDate)
+        }
+    }
     
     func showReceivedData(repo receivedGitRepo: String, login receivedGitLogin: String) {
         secondLabel.text = "Stars statistics for:\nhttps://github.com/\(receivedGitLogin)/\(receivedGitRepo)"
@@ -158,6 +158,5 @@ extension SecondViewController : CalendarDateRangePickerViewControllerDelegate {
         receivedRepo = repository
         datesAndStars = datesStars
     }
-
 }
 

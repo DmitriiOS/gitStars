@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import  ZippyJSON
 
 protocol GetGitRepoData {
     func getGitRepoData(login: String, repo: String)
@@ -52,7 +53,7 @@ final class GitStarService: GetGitRepoData {
                     completion(.failure(error))
                 case .success(let data):
                     do {
-                        let decoder = JSONDecoder()
+                        let decoder = ZippyJSONDecoder()
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
                         let stars = try decoder.decode([RepoStarsByDates].self, from: data)
                         self.repoStarsByDates.append(contentsOf: stars)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ZippyJSON
 
 protocol GetGitLogin {
     func getGitLogin(login: String)
@@ -39,7 +40,7 @@ final class GitService: GetGitLogin {
                 completion(.failure(error))
             case .success(let data):
                 do {
-                    let decoder = JSONDecoder()
+                    let decoder = ZippyJSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     self.myGitRepos = try decoder.decode([MyGitRepos].self, from: data)
                     completion(.success(self.myGitRepos))
