@@ -107,6 +107,7 @@ final class HomePresenter {
     private func showRepoStars(_ dates: [RepoStarsByDates]) {
         self.repoStarsByDates = dates
         saveLogin()
+        getRepositoryAndSaveDates()
         view.reloadRepoStars(dates)
     }
     
@@ -114,6 +115,19 @@ final class HomePresenter {
         let repositories = repos.map(GithubRepository.init)
         let githubLogin = GithubLogin(gitLogin: gitService.gitLogin, repositories: repositories)
         storage.saveLogin(login: githubLogin)
+    }
+    
+    func getRepositoryAndSaveDates()  {
+        var nodeID = ""
+        for i in 0..<repos.count {
+            if repos[i].name == receivedGitRepo { nodeID = repos[i].nodeId }
+        }
+        let repository = storage.getRepository(by: nodeID)
+        
+        let starDates = repoStarsByDates.map(GithubStarDates.init)
+        
+        let githubRepository = GithubRepository(repoID: repository!.repoID, repoName: repository!.repoName, repoStarsTotal: repository!.repoStarsTotal, starDates: starDates)
+        storage.saveRepository(repository: githubRepository)
     }
 
     // Declare here actions and handlers for events of the View

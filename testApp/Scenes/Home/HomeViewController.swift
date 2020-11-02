@@ -81,39 +81,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     func reloadRepoStars(_ myRepoStars: [RepoStarsByDates]) {
         self.myRepoStars = myRepoStars
         datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
-        
-//        let realm = try! Realm()
-        
-//        let repositories = myGitRepos.map(GithubRepository.init)
-// 
-//        githubLogin = GithubLogin(gitLogin: gitUserData.gitLogin, repositories: repositories)
-//            realmGithubLogin = RealmGithubLogin(model: githubLogin)
-//        
-//        commitToRealm(object: realmGithubLogin)
-        
-        
-        
-//        for i in 0..<myGitRepos.count {
-//            githubRepository = GithubRepository(repo: myGitRepos[i])
-////            let realm = try! Realm()
-//            try! realm.write {
-//                let repositories = RealmGithubRepository(model: githubRepository)
-//                realm.create(RealmGithubRepository.self, value: repositories, update: .all)
-//                realmGithubLogin.repositories.append(realmGithubRepository)
-//            }
-//
-//            let githubRepository = realm.objects(RealmGithubRepository.self)
-//            let realmGithubRepository = githubRepository[chosenRepoIndex]
-//
-//            for i in 0..<myRepoStars.count {
-//                githubStarDates = GithubStarDates(starDatesID: myRepoStars[i].user.nodeId, dates: myRepoStars[i].starredAt)
-//                try! realm.write {
-//                    let realmGithubStarDates = realm.create(RealmGithubStarDates.self, value: ["starDatesID" : githubStarDates.starDatesID, "dates" : githubStarDates.dates], update: .all)
-//                    realmGithubRepository.starDates.append(realmGithubStarDates)
-//                }
-//            }
-//            commitToRealm(object: realmGithubLogin)
-//        }
     }
     
     @IBAction func enterBtnTapped(_ sender: UIButton) {
@@ -123,21 +90,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         presenter.onTextTyped(messageTyped: gitUserData.gitLogin)
         presenter.reloadRepos()
     }
-    
-    // MARK: - commitToRealm func
-    
-//    func commitToRealm(object: Object) {
-//        do {
-//            let realm = try Realm()
-//            print("ПУТЬ К БАЗЕ: \(String(describing: realm.configuration.fileURL))")
-//            realm.beginWrite()
-//            realm.add(object, update: .all)
-//            try realm.commitWrite()
-//        } catch {
-//            print(error)
-//        }
-//    }
-    
     
     
     // MARK: - UITableViewDataSource/Delegate

@@ -20,13 +20,36 @@ struct RealmStorage: GithubStorage {
         let object = realm.object(ofType: RealmGithubLogin.self, forPrimaryKey: name)
         return object.map(GithubLogin.init)
     }
+    
+    func saveRepository(repository: GithubRepository) {
+        let realmGithubRepository = RealmGithubRepository(model: repository)
+        commitToRealm(object: realmGithubRepository)
+    }
+    
+    func getRepository(by name: String) -> GithubRepository? {
+        let realm = try! Realm()
+        let object = realm.object(ofType: RealmGithubRepository.self, forPrimaryKey: name)
+        return object.map(GithubRepository.init)
+    }
+    
+    func saveStarDates(starDates: GithubStarDates) {
+        let realmGithubStarDates = RealmGithubStarDates(model: starDates)
+        commitToRealm(object: realmGithubStarDates)
+    }
+    
+    func getStarDates(by chosenRepo: String) -> GithubStarDates? {
+        let realm = try! Realm()
+        let object = realm.object(ofType: RealmGithubStarDates.self, forPrimaryKey: chosenRepo)
+        return object.map(GithubStarDates.init)
+    }
    
     func commitToRealm(object: Object) {
         do {
             let realm = try Realm()
             print("ПУТЬ К БАЗЕ: \(String(describing: realm.configuration.fileURL))")
             realm.beginWrite()
-            realm.add(object, update: .all)
+//            realm.delete(object)
+            realm.add(object, update: .modified)
             try realm.commitWrite()
         } catch {
             print(error)

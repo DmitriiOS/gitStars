@@ -58,6 +58,13 @@ extension GithubStarDates {
     }
 }
 
+extension GithubStarDates {
+    init(starDates: RepoStarsByDates) {
+        self.init(starDatesID: starDates.user.nodeId,
+                  dates: starDates.starredAt)
+    }
+}
+
 
 class RealmGithubLogin: Object {
     @objc dynamic var gitLogin = ""
