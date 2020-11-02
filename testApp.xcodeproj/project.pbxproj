@@ -22,12 +22,14 @@
 		6382BBB8252C7F1C003DEFB6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6382BBB4252C7F1C003DEFB6 /* SecondViewController.swift */; };
 		6382BBB9252C7F1C003DEFB6 /* SecondConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6382BBB5252C7F1C003DEFB6 /* SecondConfigurator.swift */; };
 		6382BBC1252C7F7F003DEFB6 /* Second.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6382BBC0252C7F7F003DEFB6 /* Second.storyboard */; };
-		63904619253047CB00A923AC /* MyGitRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63904618253047CB00A923AC /* MyGitRepos.swift */; };
+		63904619253047CB00A923AC /* MyGitRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63904618253047CB00A923AC /* MyGitRepo.swift */; };
 		6390461E25304FA500A923AC /* GitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6390461D25304FA500A923AC /* GitService.swift */; };
 		63E02A1825344B5C00B3E5C6 /* RepoStarsByDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E02A1725344B5C00B3E5C6 /* RepoStarsByDates.swift */; };
 		63E02A1B25344D6700B3E5C6 /* GitStarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E02A1A25344D6700B3E5C6 /* GitStarService.swift */; };
 		9E3014592535E5E500C21320 /* DatesAndStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3014582535E5E500C21320 /* DatesAndStars.swift */; };
 		9E38911D25482DEC00603CFE /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E38911C25482DEC00603CFE /* RealmService.swift */; };
+		9E397DFE254FF59F00CBB471 /* GithubStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E397DFD254FF59F00CBB471 /* GithubStorage.swift */; };
+		9E397E05254FF6E900CBB471 /* RealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E397E04254FF6E900CBB471 /* RealmStorage.swift */; };
 		9E751B9F253EF6750032FD2F /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E751B9E253EF6750032FD2F /* RealmModels.swift */; };
 		9EC0806D2535AA4300080198 /* StarDatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC0806C2535AA4300080198 /* StarDatesService.swift */; };
 		DF7CA373604A4828F5FEE6C1 /* Pods_testApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38DA9FED5E8CB84277EEDEAA /* Pods_testApp.framework */; };
@@ -53,13 +55,15 @@
 		6382BBB4252C7F1C003DEFB6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		6382BBB5252C7F1C003DEFB6 /* SecondConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondConfigurator.swift; sourceTree = "<group>"; };
 		6382BBC0252C7F7F003DEFB6 /* Second.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Second.storyboard; sourceTree = "<group>"; };
-		63904618253047CB00A923AC /* MyGitRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGitRepos.swift; sourceTree = "<group>"; };
+		63904618253047CB00A923AC /* MyGitRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGitRepo.swift; sourceTree = "<group>"; };
 		6390461D25304FA500A923AC /* GitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitService.swift; sourceTree = "<group>"; };
 		63E02A1725344B5C00B3E5C6 /* RepoStarsByDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStarsByDates.swift; sourceTree = "<group>"; };
 		63E02A1A25344D6700B3E5C6 /* GitStarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitStarService.swift; sourceTree = "<group>"; };
 		9E17DB592546AB4300F56DB5 /* testApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "testApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		9E3014582535E5E500C21320 /* DatesAndStars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesAndStars.swift; sourceTree = "<group>"; };
 		9E38911C25482DEC00603CFE /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		9E397DFD254FF59F00CBB471 /* GithubStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubStorage.swift; sourceTree = "<group>"; };
+		9E397E04254FF6E900CBB471 /* RealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorage.swift; sourceTree = "<group>"; };
 		9E751B9E253EF6750032FD2F /* RealmModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		9EC0806C2535AA4300080198 /* StarDatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarDatesService.swift; sourceTree = "<group>"; };
 		C1062494B7D60E9E23F9CAF0 /* Pods-testApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.release.xcconfig"; path = "Target Support Files/Pods-testApp/Pods-testApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -90,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				630A7FED252EEA1E00780A3C /* GitUserData.swift */,
-				63904618253047CB00A923AC /* MyGitRepos.swift */,
+				63904618253047CB00A923AC /* MyGitRepo.swift */,
 				63E02A1725344B5C00B3E5C6 /* RepoStarsByDates.swift */,
 				9E3014582535E5E500C21320 /* DatesAndStars.swift */,
 				9E751B9E253EF6750032FD2F /* RealmModels.swift */,
@@ -101,6 +105,7 @@
 		630A7FEC252EE9CB00780A3C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9E397E03254FF6C600CBB471 /* Protocols */,
 				630A7FEB252EE9AF00780A3C /* Entities */,
 			);
 			path = Model;
@@ -128,6 +133,7 @@
 		6382BB89252C5B00003DEFB6 /* testApp */ = {
 			isa = PBXGroup;
 			children = (
+				9E397E02254FF68900CBB471 /* RealmStorage */,
 				6382BB9F252C5B65003DEFB6 /* Application */,
 				630A7FEC252EE9CB00780A3C /* Model */,
 				6390461C2530482300A923AC /* Workers */,
@@ -206,6 +212,22 @@
 				9E38911C25482DEC00603CFE /* RealmService.swift */,
 			);
 			path = Workers;
+			sourceTree = "<group>";
+		};
+		9E397E02254FF68900CBB471 /* RealmStorage */ = {
+			isa = PBXGroup;
+			children = (
+				9E397E04254FF6E900CBB471 /* RealmStorage.swift */,
+			);
+			path = RealmStorage;
+			sourceTree = "<group>";
+		};
+		9E397E03254FF6C600CBB471 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9E397DFD254FF59F00CBB471 /* GithubStorage.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		EC8E5554A4D2DF9639A347B0 /* Frameworks */ = {
@@ -333,16 +355,18 @@
 			files = (
 				63E02A1825344B5C00B3E5C6 /* RepoStarsByDates.swift in Sources */,
 				6390461E25304FA500A923AC /* GitService.swift in Sources */,
+				9E397E05254FF6E900CBB471 /* RealmStorage.swift in Sources */,
 				63E02A1B25344D6700B3E5C6 /* GitStarService.swift in Sources */,
 				630A7FEE252EEA1E00780A3C /* GitUserData.swift in Sources */,
 				6382BBB9252C7F1C003DEFB6 /* SecondConfigurator.swift in Sources */,
 				6382BB8B252C5B00003DEFB6 /* AppDelegate.swift in Sources */,
+				9E397DFE254FF59F00CBB471 /* GithubStorage.swift in Sources */,
 				6382BBA5252C5BAE003DEFB6 /* HomeNavigator.swift in Sources */,
 				9E3014592535E5E500C21320 /* DatesAndStars.swift in Sources */,
 				6382BBA6252C5BAE003DEFB6 /* HomePresenter.swift in Sources */,
 				9E751B9F253EF6750032FD2F /* RealmModels.swift in Sources */,
 				6382BBB8252C7F1C003DEFB6 /* SecondViewController.swift in Sources */,
-				63904619253047CB00A923AC /* MyGitRepos.swift in Sources */,
+				63904619253047CB00A923AC /* MyGitRepo.swift in Sources */,
 				9E38911D25482DEC00603CFE /* RealmService.swift in Sources */,
 				6382BBB6252C7F1C003DEFB6 /* SecondNavigator.swift in Sources */,
 				6382BBB7252C7F1C003DEFB6 /* SecondPresenter.swift in Sources */,

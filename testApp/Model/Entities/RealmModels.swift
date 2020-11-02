@@ -10,6 +10,14 @@ import RealmSwift
 
 struct GithubLogin {
     let gitLogin: String
+    let repositories: [GithubRepository]
+}
+
+extension GithubLogin {
+    init(object: RealmGithubLogin) {
+        self.init(gitLogin: object.gitLogin,
+                  repositories: object.repositories.map(GithubRepository.init))
+    }
 }
 
 struct GithubRepository {
@@ -29,7 +37,7 @@ extension GithubRepository {
 }
 
 extension GithubRepository {
-    init(repo: MyGitRepos) {
+    init(repo: MyGitRepo) {
         self.init(repoID: repo.nodeId,
                   repoName: repo.name,
                   repoStarsTotal: repo.stargazersCount,
@@ -53,9 +61,17 @@ extension GithubStarDates {
 
 class RealmGithubLogin: Object {
     @objc dynamic var gitLogin = ""
-    let repository = List<RealmGithubRepository>()
+    let repositories = List<RealmGithubRepository>()
     override class func primaryKey() -> String? {
         return "gitLogin"
+    }
+}
+
+extension RealmGithubLogin {
+    convenience init(model: GithubLogin) {
+        self.init()
+        gitLogin = model.gitLogin
+        repositories.append(objectsIn: model.repositories.map(RealmGithubRepository.init))
     }
 }
 

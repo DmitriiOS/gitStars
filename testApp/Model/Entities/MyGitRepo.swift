@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MyGitRepos: Decodable {
+struct MyGitRepo: Decodable {
     var nodeId: String
     var name: String
     var stargazersCount: Int

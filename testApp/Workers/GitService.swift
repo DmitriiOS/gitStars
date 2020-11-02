@@ -9,7 +9,7 @@ import Foundation
 import ZippyJSON
 
 protocol GetGitLogin {
-    func getGitLogin(login: String)
+    func updateGitLogin(login: String)
 }
 
 final class GitService: GetGitLogin {
@@ -17,11 +17,11 @@ final class GitService: GetGitLogin {
     private let baseUrlString = "https://api.github.com/users/"
     private let gitReposSuffix = "/repos"
     
-    var myGitRepos: [MyGitRepos] = []
+    var myGitRepos: [MyGitRepo] = []
     
     var gitLogin = ""
     
-    func getGitLogin(login: String) {
+    func updateGitLogin(login: String) {
         gitLogin = login
     }
     
@@ -31,7 +31,7 @@ final class GitService: GetGitLogin {
     
     // MARK: - Actions
 
-    func loadFacts(completion: @escaping (Result<[MyGitRepos], Error>) -> Void) {
+    func loadFacts(completion: @escaping (Result<[MyGitRepo], Error>) -> Void) {
         let url = URL(string: "\(baseUrlString)\(gitLogin)\(gitReposSuffix)")!
         
         loadFromUrl(url: url) {
@@ -42,7 +42,7 @@ final class GitService: GetGitLogin {
                 do {
                     let decoder = ZippyJSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    self.myGitRepos = try decoder.decode([MyGitRepos].self, from: data)
+                    self.myGitRepos = try decoder.decode([MyGitRepo].self, from: data)
                     completion(.success(self.myGitRepos))
                 } catch {
                     print("Error: \(error)")

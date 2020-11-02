@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol HomeView: AnyObject {
-    func reloadFactsList(_ factNames: [MyGitRepos])
+    func reloadFactsList(_ factNames: [MyGitRepo])
     func reloadRepoStars(_ starDates: [RepoStarsByDates])
     func whenAllDataIsReady()
 }
@@ -24,9 +24,10 @@ final class HomePresenter {
     private var repoStarsByDates: [RepoStarsByDates] = []
     var starDatesService: StarDatesService
     private var datesAndStars: [DatesAndStars] = []
-    private var repos: [MyGitRepos] = []
+    private var repos: [MyGitRepo] = []
     private var receivedGitRepo: String = ""
     private var receivedGitLogin: String = ""
+    private let storage: GithubStorage
 
 	// MARK: - Lifecycle
 
@@ -34,7 +35,8 @@ final class HomePresenter {
          navigator: HomeNavigator,
          gitService: GitService,
          gitStarService: GitStarService,
-         starDatesService: StarDatesService
+         starDatesService: StarDatesService,
+         storage: GithubStorage
 
     ){
 		self.view = view
@@ -42,6 +44,7 @@ final class HomePresenter {
         self.gitService = gitService
         self.gitStarService = gitStarService
         self.starDatesService = starDatesService
+        self.storage = storage
 	}
 
 
@@ -60,7 +63,7 @@ final class HomePresenter {
     
     func onTextTyped(messageTyped: String) {
         let message = messageTyped
-        gitService.getGitLogin(login: message)
+        gitService.updateGitLogin(login: message)
     }
     
     func onRepoSelected(receivedDatesAndStars: [DatesAndStars], gitRepoEntered: String, gitLoginEntered: String) {
@@ -82,10 +85,9 @@ final class HomePresenter {
         }
     }
     
-    private func showRepos(_ repos: [MyGitRepos]) {
+    private func showRepos(_ repos: [MyGitRepo]) {
         self.repos = repos
-        let factNames = repos
-        view.reloadFactsList(factNames)
+        view.reloadFactsList(repos)
     }
     
     func reloadStarDates() {
@@ -104,8 +106,14 @@ final class HomePresenter {
     
     private func showRepoStars(_ dates: [RepoStarsByDates]) {
         self.repoStarsByDates = dates
-        let starDates = repoStarsByDates
-        view.reloadRepoStars(starDates)
+        saveLogin()
+        view.reloadRepoStars(dates)
+    }
+    
+    func saveLogin() {
+        let repositories = repos.map(GithubRepository.init)
+        let githubLogin = GithubLogin(gitLogin: gitService.gitLogin, repositories: repositories)
+        storage.saveLogin(login: githubLogin)
     }
 
     // Declare here actions and handlers for events of the View

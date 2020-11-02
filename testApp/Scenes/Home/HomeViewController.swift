@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
 	var presenter: HomePresenter!
     var gitUserData: GitUserData = GitUserData.init(gitLogin: "", gitChosenRepo: "")
     private let kReposCellID = "Cell"
-    private var myGitRepos: [MyGitRepos] = []
+    private var myGitRepos: [MyGitRepo] = []
     var datesAndStars: [DatesAndStars] = []
     private var myRepoStars: [RepoStarsByDates] = []
     var realmGithubLogin = RealmGithubLogin()
@@ -71,7 +71,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     // MARK: - FactsView
     
-    func reloadFactsList(_ factNames: [MyGitRepos]) {
+    func reloadFactsList(_ factNames: [MyGitRepo]) {
         myGitRepos = factNames
         tableView.reloadData()
     }
@@ -82,18 +82,24 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         self.myRepoStars = myRepoStars
         datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
         
-        let realm = try! Realm()
+//        let realm = try! Realm()
         
-        githubLogin = GithubLogin(gitLogin: gitUserData.gitLogin)
-        realmGithubLogin = RealmGithubLogin(value: ["gitLogin" : githubLogin.gitLogin])
+//        let repositories = myGitRepos.map(GithubRepository.init)
+// 
+//        githubLogin = GithubLogin(gitLogin: gitUserData.gitLogin, repositories: repositories)
+//            realmGithubLogin = RealmGithubLogin(model: githubLogin)
+//        
+//        commitToRealm(object: realmGithubLogin)
+        
+        
         
 //        for i in 0..<myGitRepos.count {
 //            githubRepository = GithubRepository(repo: myGitRepos[i])
 ////            let realm = try! Realm()
 //            try! realm.write {
-//                let repository = RealmGithubRepository(model: githubRepository)
-//                realm.create(RealmGithubRepository.self, value: repository, update: .all)
-//                realmGithubLogin.repository.append(realmGithubRepository)
+//                let repositories = RealmGithubRepository(model: githubRepository)
+//                realm.create(RealmGithubRepository.self, value: repositories, update: .all)
+//                realmGithubLogin.repositories.append(realmGithubRepository)
 //            }
 //
 //            let githubRepository = realm.objects(RealmGithubRepository.self)
@@ -120,17 +126,17 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     // MARK: - commitToRealm func
     
-    func commitToRealm(object: Object) {
-        do {
-            let realm = try Realm()
-            print("ПУТЬ К БАЗЕ: \(String(describing: realm.configuration.fileURL))")
-            realm.beginWrite()
-            realm.add(object, update: .all)
-            try realm.commitWrite()
-        } catch {
-            print(error)
-        }
-    }
+//    func commitToRealm(object: Object) {
+//        do {
+//            let realm = try Realm()
+//            print("ПУТЬ К БАЗЕ: \(String(describing: realm.configuration.fileURL))")
+//            realm.beginWrite()
+//            realm.add(object, update: .all)
+//            try realm.commitWrite()
+//        } catch {
+//            print(error)
+//        }
+//    }
     
     
     
