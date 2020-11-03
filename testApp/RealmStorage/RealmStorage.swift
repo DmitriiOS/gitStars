@@ -48,7 +48,6 @@ struct RealmStorage: GithubStorage {
             let realm = try Realm()
             print("ПУТЬ К БАЗЕ: \(String(describing: realm.configuration.fileURL))")
             realm.beginWrite()
-//            realm.delete(object)
             realm.add(object, update: .modified)
             try realm.commitWrite()
         } catch {

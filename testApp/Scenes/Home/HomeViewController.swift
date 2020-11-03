@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RealmSwift
+
 
 class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITableViewDataSource {
 
@@ -87,7 +87,8 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         tableView.isHidden = false
         gitUserData.gitLogin = textField.text ?? ""
         tableView.reloadData()
-        presenter.onTextTyped(messageTyped: gitUserData.gitLogin)
+        presenter.onTextTypedAndLoadFromRealm(messageTyped: gitUserData.gitLogin)
+        presenter.onTextTypedAndLoadFromAPI(messageTyped: gitUserData.gitLogin)
         presenter.reloadRepos()
     }
     

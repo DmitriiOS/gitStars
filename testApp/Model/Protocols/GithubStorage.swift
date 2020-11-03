@@ -16,5 +16,7 @@ protocol GithubStorage {
     func getRepository(by name: String) -> GithubRepository?
     
     func saveStarDates(starDates: GithubStarDates)
-    func getStarDates(by chosenRepo: String) -> GithubStarDates?   
+    func getStarDates(by chosenRepo: String) -> GithubStarDates?
+    
+    
 }
