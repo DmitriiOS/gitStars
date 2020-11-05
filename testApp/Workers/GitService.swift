@@ -8,31 +8,30 @@
 import Foundation
 import ZippyJSON
 
-protocol GetGitLogin {
-    func updateGitLogin(login: String)
-}
+//protocol GetGitLogin {
+//    func updateGitLogin(login: String)
+//}
 
-final class GitService: GetGitLogin {
+struct GitService {
     
     private let baseUrlString = "https://api.github.com/users/"
     private let gitReposSuffix = "/repos"
-    
-    var myGitRepos: [MyGitRepo] = []
-    
     var gitLogin = ""
+    private let urlSession = URLSession.shared
+    let storage: GithubStorage
     
-    func updateGitLogin(login: String) {
+    mutating func updateGitLogin(login: String) {
         gitLogin = login
     }
-    
-    private let urlSession = URLSession.shared
-    
-//    let storage: GithubStorage
-    
+
     // MARK: - Actions
 
     func loadFacts(completion: @escaping (Result<[MyGitRepo], Error>) -> Void) {
         let url = URL(string: "\(baseUrlString)\(gitLogin)\(gitReposSuffix)")!
+        
+        var myGitRepos = [MyGitRepo]()
+        
+
         
         loadFromUrl(url: url) {
             switch $0 {
@@ -42,8 +41,9 @@ final class GitService: GetGitLogin {
                 do {
                     let decoder = ZippyJSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    self.myGitRepos = try decoder.decode([MyGitRepo].self, from: data)
-                    completion(.success(self.myGitRepos))
+                    myGitRepos = try decoder.decode([MyGitRepo].self, from: data)
+                    saveLogin(with: myGitRepos)
+                    completion(.success(myGitRepos))
                 } catch {
                     print("Error: \(error)")
                     completion(.failure(CommonError.brokenData(data)))
@@ -53,7 +53,23 @@ final class GitService: GetGitLogin {
     }
     
     // MARK: - Internal
-
+    
+    func fetchRepositories(by login: String) -> [GithubRepository]? {
+        storage.getLogin(by: login)?.repositories
+    }
+    
+    private func saveLogin(with repos: [MyGitRepo]) {
+        let repositories = repos.map(GithubRepository.init).map(repositoryWithDates)
+        let githubLogin = GithubLogin(gitLogin: gitLogin, repositories: repositories)
+        storage.saveLogin(githubLogin)
+    }
+    
+    func repositoryWithDates(repository: GithubRepository) -> GithubRepository {
+        var repository = repository
+        repository.starDates = storage.getStarDates(by: repository.repoID) ?? []
+        return repository
+    }
+    
     private func loadFromUrl(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         urlSession.dataTask(with: url) { (data, _, error) in
             if let err = error {
@@ -65,7 +81,6 @@ final class GitService: GetGitLogin {
             }
         }.resume()
     }
-
 
     // MARK: - Subtypes
 
@@ -86,5 +101,4 @@ final class GitService: GetGitLogin {
             }
         }
     }
-    
 }

@@ -19,7 +19,7 @@ final class HomePresenter {
     private let reloadDispatchGroup = DispatchGroup()
 	private unowned var view: HomeView
 	private let navigator: HomeNavigator
-    private let gitService: GitService
+    private var gitService: GitService
     private var gitStarService: GitStarService
     private var repoStarsByDates: [RepoStarsByDates] = []
     var starDatesService: StarDatesService
@@ -27,7 +27,6 @@ final class HomePresenter {
     private var repos: [MyGitRepo] = []
     private var receivedGitRepo: String = ""
     private var receivedGitLogin: String = ""
-    private let storage: GithubStorage
 
 	// MARK: - Lifecycle
 
@@ -35,16 +34,13 @@ final class HomePresenter {
          navigator: HomeNavigator,
          gitService: GitService,
          gitStarService: GitStarService,
-         starDatesService: StarDatesService,
-         storage: GithubStorage
-
-    ){
+         starDatesService: StarDatesService)
+    {
 		self.view = view
 		self.navigator = navigator
         self.gitService = gitService
         self.gitStarService = gitStarService
         self.starDatesService = starDatesService
-        self.storage = storage
 	}
 
 
@@ -66,14 +62,8 @@ final class HomePresenter {
     
     func onTextTypedAndLoadFromRealm(messageTyped: String) {
         let message = messageTyped
-        // загружаем realm. если таблица GithubLogin содержит message, то загружаем его + его репозитории. + обновляем экран (таблицу)
-        if let dataFromRealm = storage.getLogin(by: message) {
-            var repos = [MyGitRepo]()
-            for i in 0..<dataFromRealm.repositories.count {
-                repos.append(MyGitRepo(nodeId: dataFromRealm.repositories[i].repoID,
-                                       name: dataFromRealm.repositories[i].repoName,
-                                       stargazersCount: dataFromRealm.repositories[i].repoStarsTotal))
-            }
+        if let repositories = gitService.fetchRepositories(by: message) {
+            let repos = repositories.map(MyGitRepo.init)
             view.reloadFactsList(repos)
         }
         gitService.updateGitLogin(login: message)
@@ -105,15 +95,15 @@ final class HomePresenter {
     
     private func showRepos(_ repos: [MyGitRepo]) {
         self.repos = repos
-        
         view.reloadFactsList(repos)
     }
     
     func reloadStarDates() {
-        repoStarsByDates = []
-        //загружаем realm. если таблица GithubRepositories содержит gitChosenRepo, то загружаем его + его даты.
-        // ВОПРОС: Если взять даты из БД и перейти на второй экран, то как там подтянуть данные из сети? А если ждать обновления из сети, то какой смысл загружать из БД?
-        self.gitStarService.loadRepoDates(login: receivedGitLogin, repoName: receivedGitRepo) { [weak self] in
+
+        guard let repoId = repos.first(where: { $0.name == receivedGitRepo })?.nodeId else {
+            return
+        }
+        self.gitStarService.loadRepoDates(login: receivedGitLogin, repoName: receivedGitRepo, repoId: repoId) { [weak self] in
             switch $0 {
             case .failure(_):
                 break
@@ -128,29 +118,7 @@ final class HomePresenter {
     
     private func showRepoStars(_ dates: [RepoStarsByDates]) {
         self.repoStarsByDates = dates
-        
-        saveLogin()
-        getRepositoryAndSaveDates()
         view.reloadRepoStars(dates)
-    }
-    
-    func saveLogin() {
-        let repositories = repos.map(GithubRepository.init)
-        let githubLogin = GithubLogin(gitLogin: gitService.gitLogin, repositories: repositories)
-        storage.saveLogin(githubLogin)
-    }
-    
-    func getRepositoryAndSaveDates()  {
-        guard let nodeID = repos.first(where: { $0.name == receivedGitRepo })?.nodeId else {
-            return
-        }
-        
-        let repository = storage.getRepository(by: nodeID)
-        
-        let starDates = repoStarsByDates.map(GithubStarDates.init)
-        
-        let githubRepository = GithubRepository(repoID: repository!.repoID, repoName: repository!.repoName, repoStarsTotal: repository!.repoStarsTotal, starDates: starDates)
-        storage.saveRepository(githubRepository)
     }
 
     // Declare here actions and handlers for events of the View

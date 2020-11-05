@@ -13,4 +13,10 @@ struct MyGitRepo: Decodable {
     var stargazersCount: Int
 }
 
-
+extension MyGitRepo {
+    init(githubRepo: GithubRepository) {
+        self.nodeId = githubRepo.repoID
+        self.name = githubRepo.repoName
+        self.stargazersCount = githubRepo.repoStarsTotal
+    }
+}

@@ -21,7 +21,7 @@ struct GitStarService {
     
     // MARK: - Actions
 
-    func loadRepoDates(login: String, repoName: String, completion: @escaping (Result<[RepoStarsByDates], Error>) -> Void) {
+    func loadRepoDates(login: String, repoName: String, repoId: String, completion: @escaping (Result<[RepoStarsByDates], Error>) -> Void) {
         
         var pageNum = 1
         var repoStarsByDates = [RepoStarsByDates]()
@@ -60,8 +60,9 @@ struct GitStarService {
             pageNum += 1
             print("Next page \(pageNum)")
         }
-        let repoId = repoStarsByDates.first?.user.nodeId ?? ""
+        
         storage.saveStarDates(starDates: repoStarsByDates.map(GithubStarDates.init), for: repoId)
+        
         completion(.success(repoStarsByDates))
         
     }

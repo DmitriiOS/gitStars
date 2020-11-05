@@ -24,17 +24,17 @@ final class HomeConfigurator {
         let vc = storyboard.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
         let navigationController = UINavigationController(rootViewController: vc)
         let navigator = DefaultHomeNavigator(navigationController: navigationController)
-        let gitService = GitService()
         let storage = RealmStorage()
+        let gitService = GitService(storage: storage)
         let gitStarService = GitStarService(storage: storage)
         let starDatesService = StarDatesService()
       
+
         vc.presenter = HomePresenter(view: vc,
                                      navigator: navigator,
                                      gitService: gitService,
                                      gitStarService: gitStarService,
-                                     starDatesService: starDatesService,
-                                     storage: storage)
+                                     starDatesService: starDatesService)
         
         return navigationController
     }
