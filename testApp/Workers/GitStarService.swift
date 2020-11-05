@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import  ZippyJSON
+import ZippyJSON
 
 struct GitStarService {
     
@@ -18,7 +18,6 @@ struct GitStarService {
     private let urlSession = URLSession.shared
     
     let storage: GithubStorage
-    
     
     // MARK: - Actions
 
@@ -61,7 +60,8 @@ struct GitStarService {
             pageNum += 1
             print("Next page \(pageNum)")
         }
-storage
+        let repoId = repoStarsByDates.first?.user.nodeId ?? ""
+        storage.saveStarDates(starDates: repoStarsByDates.map(GithubStarDates.init), for: repoId)
         completion(.success(repoStarsByDates))
         
     }

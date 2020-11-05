@@ -9,7 +9,6 @@
 import UIKit
 import Charts
 import CalendarDateRangePickerViewController
-//import RealmSwift
 
 class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     
@@ -54,7 +53,6 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         barChartView.xAxis.drawLabelsEnabled = true
         barChartView.xAxis.labelPosition = .bottom
         barChartView.xAxis.granularity = 1
-//        print("ДАТЫ ДЛЯ ГРАФИКА: \(datesForChart)")
     }
     
     // MARK: - Setup

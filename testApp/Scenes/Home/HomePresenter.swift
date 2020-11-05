@@ -127,7 +127,6 @@ final class HomePresenter {
     }
     
     private func showRepoStars(_ dates: [RepoStarsByDates]) {
-//        self.repoStarsByDates = [RepoStarsByDates]()
         self.repoStarsByDates = dates
         
         saveLogin()
@@ -142,12 +141,6 @@ final class HomePresenter {
     }
     
     func getRepositoryAndSaveDates()  {
-//        var nodeID = ""
-//        for i in 0..<repos.count {
-//            if repos[i].name == receivedGitRepo {
-//                nodeID = repos[i].nodeId
-//            }
-//        }
         guard let nodeID = repos.first(where: { $0.name == receivedGitRepo })?.nodeId else {
             return
         }
