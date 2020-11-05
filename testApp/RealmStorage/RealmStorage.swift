@@ -10,7 +10,7 @@ import RealmSwift
 
 struct RealmStorage: GithubStorage {
     
-    func saveLogin(login: GithubLogin) {
+    func saveLogin(_ login: GithubLogin) {
         let realmGithubLogin = RealmGithubLogin(model: login)
         commitToRealm(object: realmGithubLogin)
     }
@@ -21,26 +21,25 @@ struct RealmStorage: GithubStorage {
         return object.map(GithubLogin.init)
     }
     
-    func saveRepository(repository: GithubRepository) {
+    func saveRepository(_ repository: GithubRepository) {
         let realmGithubRepository = RealmGithubRepository(model: repository)
         commitToRealm(object: realmGithubRepository)
     }
     
-    func getRepository(by name: String) -> GithubRepository? {
+    func getRepository(by id: String) -> GithubRepository? {
         let realm = try! Realm()
-        let object = realm.object(ofType: RealmGithubRepository.self, forPrimaryKey: name)
+        let object = realm.object(ofType: RealmGithubRepository.self, forPrimaryKey: id)
         return object.map(GithubRepository.init)
     }
     
-    func saveStarDates(starDates: GithubStarDates) {
-        let realmGithubStarDates = RealmGithubStarDates(model: starDates)
-        commitToRealm(object: realmGithubStarDates)
+    func saveStarDates(starDates: [GithubStarDates], for repoId: String) {
+        guard var repository = getRepository(by: repoId) else { return }
+        repository.starDates = starDates
+        saveRepository(repository)
     }
     
-    func getStarDates(by chosenRepo: String) -> GithubStarDates? {
-        let realm = try! Realm()
-        let object = realm.object(ofType: RealmGithubStarDates.self, forPrimaryKey: chosenRepo)
-        return object.map(GithubStarDates.init)
+    func getStarDates(by repoId: String) -> [GithubStarDates]? {
+        getRepository(by: repoId)?.starDates
     }
    
     func commitToRealm(object: Object) {

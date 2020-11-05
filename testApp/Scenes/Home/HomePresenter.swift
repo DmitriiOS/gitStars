@@ -62,7 +62,6 @@ final class HomePresenter {
     func onRepositoryChosen(chosenLogin: String, chosenRepo: String) {
         receivedGitLogin = chosenLogin
         receivedGitRepo = chosenRepo
-        gitStarService.getGitRepoData(login: receivedGitLogin, repo: receivedGitRepo)
     }
     
     func onTextTypedAndLoadFromRealm(messageTyped: String) {
@@ -114,7 +113,7 @@ final class HomePresenter {
         repoStarsByDates = []
         //загружаем realm. если таблица GithubRepositories содержит gitChosenRepo, то загружаем его + его даты.
         // ВОПРОС: Если взять даты из БД и перейти на второй экран, то как там подтянуть данные из сети? А если ждать обновления из сети, то какой смысл загружать из БД?
-        self.gitStarService.loadRepoDates { [weak self] in
+        self.gitStarService.loadRepoDates(login: receivedGitLogin, repoName: receivedGitRepo) { [weak self] in
             switch $0 {
             case .failure(_):
                 break
@@ -139,7 +138,7 @@ final class HomePresenter {
     func saveLogin() {
         let repositories = repos.map(GithubRepository.init)
         let githubLogin = GithubLogin(gitLogin: gitService.gitLogin, repositories: repositories)
-        storage.saveLogin(login: githubLogin)
+        storage.saveLogin(githubLogin)
     }
     
     func getRepositoryAndSaveDates()  {
@@ -158,7 +157,7 @@ final class HomePresenter {
         let starDates = repoStarsByDates.map(GithubStarDates.init)
         
         let githubRepository = GithubRepository(repoID: repository!.repoID, repoName: repository!.repoName, repoStarsTotal: repository!.repoStarsTotal, starDates: starDates)
-        storage.saveRepository(repository: githubRepository)
+        storage.saveRepository(githubRepository)
     }
 
     // Declare here actions and handlers for events of the View

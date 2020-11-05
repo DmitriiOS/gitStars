@@ -9,14 +9,12 @@ import Foundation
 
 
 protocol GithubStorage {
-    func saveLogin(login: GithubLogin)
+    func saveLogin(_ login: GithubLogin)
     func getLogin(by name: String) -> GithubLogin?
     
-    func saveRepository(repository: GithubRepository)
-    func getRepository(by name: String) -> GithubRepository?
+    func saveRepository(_ repository: GithubRepository)
+    func getRepository(by id: String) -> GithubRepository?
     
-    func saveStarDates(starDates: GithubStarDates)
-    func getStarDates(by chosenRepo: String) -> GithubStarDates?
-    
-    
+    func saveStarDates(starDates: [GithubStarDates], for repoId: String)
+    func getStarDates(by repoId: String) -> [GithubStarDates]?
 }

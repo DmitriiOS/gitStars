@@ -24,7 +24,7 @@ struct GithubRepository {
     let repoID: String
     let repoName: String
     let repoStarsTotal: Int
-    let starDates: [GithubStarDates]
+    var starDates: [GithubStarDates]
 }
 
 extension GithubRepository {

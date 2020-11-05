@@ -8,38 +8,28 @@
 import Foundation
 import  ZippyJSON
 
-protocol GetGitRepoData {
-    func getGitRepoData(login: String, repo: String)
-}
-
-final class GitStarService: GetGitRepoData {
-
+struct GitStarService {
     
     private let baseRepoUrlString = "https://api.github.com/repos/"
     private let gitRepoSuffix = "/stargazers"
     
     private let reloadDispatchGroup = DispatchGroup()
     
-    var login = ""
-    var repo = ""
-    
-    func getGitRepoData(login: String, repo: String) {
-        self.login = login
-        self.repo = repo
-    }
-    
     private let urlSession = URLSession.shared
+    
+    let storage: GithubStorage
+    
     
     // MARK: - Actions
 
-    func loadRepoDates(completion: @escaping (Result<[RepoStarsByDates], Error>) -> Void) {
-
+    func loadRepoDates(login: String, repoName: String, completion: @escaping (Result<[RepoStarsByDates], Error>) -> Void) {
+        
         var pageNum = 1
         var repoStarsByDates = [RepoStarsByDates]()
         
         while pageNum < 5 {
 
-            let url = URL(string: "\(baseRepoUrlString)\(login)/\(repo)\(gitRepoSuffix)?page=\(pageNum)&per_page=100")!
+            let url = URL(string: "\(baseRepoUrlString)\(login)/\(repoName)\(gitRepoSuffix)?page=\(pageNum)&per_page=100")!
 
             var request = URLRequest(url: url)
             request.addValue("application/vnd.github.v3.star+json", forHTTPHeaderField: "Accept")
@@ -71,7 +61,7 @@ final class GitStarService: GetGitRepoData {
             pageNum += 1
             print("Next page \(pageNum)")
         }
-
+storage
         completion(.success(repoStarsByDates))
         
     }
