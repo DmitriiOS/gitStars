@@ -40,6 +40,9 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        myGitRepos = []
+        datesAndStars = []
+        myRepoStars = []
         presenter.viewWillAppear()
     }
     
@@ -47,7 +50,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     func activityIndicatorStart() {
         activityIndicator.startAnimating()
-        activityIndicator.layer.zPosition = 1
         activityIndicator.isHidden = false
         textField.isEnabled = false
         enterButton.isEnabled = false
@@ -109,12 +111,12 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        activityIndicatorStart()
+//        activityIndicatorStart()
         gitUserData.gitChosenRepo = myGitRepos[indexPath.row].name
         chosenRepoIndex = indexPath.row
         presenter.onRepositoryChosen(chosenLogin: gitUserData.gitLogin, chosenRepo: gitUserData.gitChosenRepo)
         presenter.reloadStarDates()
-        activityIndicatorStop()
+//        activityIndicatorStop()
     }
     
     func whenAllDataIsReady() {

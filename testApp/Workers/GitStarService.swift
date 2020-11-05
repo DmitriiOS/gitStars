@@ -20,8 +20,6 @@ final class GitStarService: GetGitRepoData {
     
     private let reloadDispatchGroup = DispatchGroup()
     
-    var repoStarsByDates: [RepoStarsByDates] = []
-    
     var login = ""
     var repo = ""
     
@@ -37,6 +35,7 @@ final class GitStarService: GetGitRepoData {
     func loadRepoDates(completion: @escaping (Result<[RepoStarsByDates], Error>) -> Void) {
 
         var pageNum = 1
+        var repoStarsByDates = [RepoStarsByDates]()
         
         while pageNum < 5 {
 
@@ -56,7 +55,7 @@ final class GitStarService: GetGitRepoData {
                         let decoder = ZippyJSONDecoder()
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
                         let stars = try decoder.decode([RepoStarsByDates].self, from: data)
-                        self.repoStarsByDates.append(contentsOf: stars)
+                        repoStarsByDates.append(contentsOf: stars)
                         print("Loaded")
                     } catch {
                         print("Error: \(error)")
@@ -73,7 +72,7 @@ final class GitStarService: GetGitRepoData {
             print("Next page \(pageNum)")
         }
 
-        completion(.success(self.repoStarsByDates))
+        completion(.success(repoStarsByDates))
         
     }
     

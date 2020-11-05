@@ -86,7 +86,7 @@ class RealmGithubRepository: Object {
     @objc dynamic var repoID = ""
     @objc dynamic var repoName = ""
     @objc dynamic var repoStarsTotal = 0
-    var starDates = List<RealmGithubStarDates>()
+    let starDates = List<RealmGithubStarDates>()
     override class func primaryKey() -> String? {
         return "repoID"
     }

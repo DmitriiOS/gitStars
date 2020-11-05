@@ -17,13 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Usr-2T-eb6">
-                                <rect key="frame" x="147.5" y="293.5" width="80" height="80"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" id="Usr-2T-eb6">
+                                <rect key="frame" x="147" y="293" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemBlueColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="9Wm-An-w6q"/>
-                                    <constraint firstAttribute="width" constant="80" id="jVu-Oh-UKF"/>
-                                </constraints>
                                 <color key="color" systemColor="systemBlueColor"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7GT-3f-lmg">
@@ -85,14 +82,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HGg-TW-TCu" firstAttribute="bottom" secondItem="78c-B6-KeD" secondAttribute="bottom" constant="8" id="75R-fV-4M4"/>
-                            <constraint firstItem="Usr-2T-eb6" firstAttribute="centerY" secondItem="zoB-vs-Nea" secondAttribute="centerY" id="IJ8-W8-OlO"/>
                             <constraint firstItem="78c-B6-KeD" firstAttribute="leading" secondItem="HGg-TW-TCu" secondAttribute="leading" constant="16" id="Qvw-S7-XIC"/>
                             <constraint firstItem="7GT-3f-lmg" firstAttribute="leading" secondItem="zoB-vs-Nea" secondAttribute="leading" constant="16" id="RYY-fj-Xl4"/>
                             <constraint firstItem="7GT-3f-lmg" firstAttribute="top" secondItem="HGg-TW-TCu" secondAttribute="top" constant="16" id="VnP-xY-vjk"/>
                             <constraint firstItem="HGg-TW-TCu" firstAttribute="trailing" secondItem="78c-B6-KeD" secondAttribute="trailing" constant="16" id="gil-Mf-1GI"/>
                             <constraint firstItem="78c-B6-KeD" firstAttribute="top" secondItem="7GT-3f-lmg" secondAttribute="bottom" constant="16" id="pf8-9V-rEC"/>
                             <constraint firstItem="HGg-TW-TCu" firstAttribute="trailing" secondItem="7GT-3f-lmg" secondAttribute="trailing" constant="16" id="pl3-cG-v2a"/>
-                            <constraint firstItem="Usr-2T-eb6" firstAttribute="centerX" secondItem="zoB-vs-Nea" secondAttribute="centerX" id="s8B-2C-qHK"/>
                         </constraints>
                     </view>
                     <connections>
@@ -104,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0Z-Hl-ScH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-330" y="185"/>
+            <point key="canvasLocation" x="-330.39999999999998" y="184.85757121439281"/>
         </scene>
     </scenes>
     <resources>
