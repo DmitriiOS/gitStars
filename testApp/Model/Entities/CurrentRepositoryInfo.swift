@@ -7,16 +7,22 @@
 
 import Foundation
 
-struct MyGitRepo: Decodable {
+struct CurrentRepositoryInfo: Decodable {
     var nodeId: String
     var name: String
+    var owner: Owner
     var stargazersCount: Int
 }
 
-extension MyGitRepo {
+struct Owner: Decodable {
+    var login: String
+}
+
+extension CurrentRepositoryInfo {
     init(githubRepo: GithubRepository) {
         self.nodeId = githubRepo.repoID
         self.name = githubRepo.repoName
+        self.owner = Owner(login: githubRepo.ownerName)
         self.stargazersCount = githubRepo.repoStarsTotal
     }
 }

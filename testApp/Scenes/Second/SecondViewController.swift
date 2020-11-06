@@ -12,8 +12,12 @@ import CalendarDateRangePickerViewController
 
 class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     
-    var receivedLogin = ""
-    var receivedRepo = ""
+//    var receivedLogin = ""
+//    var receivedRepo = ""
+    var currentRepositoryId = ""
+    var currentRepositoryName = ""
+    var currentRepositoryOwnerLogin = ""
+    
     var datesForChart: [String] = []
     var startDateDate = Date()
     var endDateDate = Date()
@@ -46,7 +50,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
-        showReceivedData(repo: receivedRepo, login: receivedLogin)
+        showReceivedData(repo: currentRepositoryName, login: currentRepositoryOwnerLogin)
         getDatesForChart()
         barChartView.xAxis.enabled = true
         barChartView.xAxis.wordWrapEnabled = true
@@ -151,10 +155,15 @@ extension SecondViewController : CalendarDateRangePickerViewControllerDelegate {
 
 // MARK: - GetDataFromHomeVC
     
-    func getLoginRepoDatesStars(datesStars: [DatesAndStars], login: String, repository: String) {
-        receivedLogin = login
-        receivedRepo = repository
-        datesAndStars = datesStars
+//    func getLoginRepoDatesStars(datesStars: [DatesAndStars], login: String, repository: String) {
+//        receivedLogin = login
+//        receivedRepo = repository
+//        datesAndStars = datesStars
+//    }
+    func getCurrentRepositoryInfo(currentRepositoryInfo: CurrentRepositoryInfo) {
+        currentRepositoryId = currentRepositoryInfo.nodeId
+        currentRepositoryName = currentRepositoryInfo.name
+        currentRepositoryOwnerLogin = currentRepositoryInfo.owner.login
     }
 }
 

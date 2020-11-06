@@ -14,7 +14,9 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
 	var presenter: HomePresenter!
     var gitUserData: GitUserData = GitUserData.init(gitLogin: "", gitChosenRepo: "")
     private let kReposCellID = "Cell"
-    private var myGitRepos: [MyGitRepo] = []
+    
+    private var repositoriesInfo: [CurrentRepositoryInfo] = []
+    
     var datesAndStars: [DatesAndStars] = []
     private var myRepoStars: [RepoStarsByDates] = []
     var realmGithubLogin = RealmGithubLogin()
@@ -40,7 +42,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        myGitRepos = []
+        repositoriesInfo = []
         datesAndStars = []
         myRepoStars = []
         presenter.viewWillAppear()
@@ -73,8 +75,8 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     // MARK: - FactsView
     
-    func reloadFactsList(_ factNames: [MyGitRepo]) {
-        myGitRepos = factNames
+    func reloadFactsList(_ factNames: [CurrentRepositoryInfo]) {
+        repositoriesInfo = factNames
         tableView.reloadData()
     }
     
@@ -98,12 +100,12 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     // MARK: - UITableViewDataSource/Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        myGitRepos.count
+        repositoriesInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kReposCellID) ?? UITableViewCell(style: .default, reuseIdentifier: kReposCellID)
-        let repo = myGitRepos[indexPath.row]
+        let repo = repositoriesInfo[indexPath.row]
         cell.textLabel?.text = repo.name
         cell.detailTextLabel?.text = "Количество звезд: \(repo.stargazersCount)"
         return cell
@@ -112,7 +114,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        activityIndicatorStart()
-        gitUserData.gitChosenRepo = myGitRepos[indexPath.row].name
+        gitUserData.gitChosenRepo = repositoriesInfo[indexPath.row].name
         chosenRepoIndex = indexPath.row
         presenter.onRepositoryChosen(chosenLogin: gitUserData.gitLogin, chosenRepo: gitUserData.gitChosenRepo)
         presenter.reloadStarDatesFromDB()
@@ -122,6 +124,10 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     func whenAllDataIsReady() {
         print("ВСЕ ГОТОВО: \(datesAndStars.count)")
-        presenter.onRepoSelected(receivedDatesAndStars: datesAndStars, gitRepoEntered: gitUserData.gitChosenRepo, gitLoginEntered: gitUserData.gitLogin)
+//        presenter.onRepoSelected(currentRepositoryInfo: <#T##CurrentRepositoryInfo#>)
+        
+//        presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo
+//            receivedDatesAndStars: datesAndStars, gitRepoEntered: gitUserData.gitChosenRepo, gitLoginEntered: gitUserData.gitLogin
+//        )
     }
 }

@@ -22,7 +22,7 @@
 		6382BBB8252C7F1C003DEFB6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6382BBB4252C7F1C003DEFB6 /* SecondViewController.swift */; };
 		6382BBB9252C7F1C003DEFB6 /* SecondConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6382BBB5252C7F1C003DEFB6 /* SecondConfigurator.swift */; };
 		6382BBC1252C7F7F003DEFB6 /* Second.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6382BBC0252C7F7F003DEFB6 /* Second.storyboard */; };
-		63904619253047CB00A923AC /* MyGitRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63904618253047CB00A923AC /* MyGitRepo.swift */; };
+		63904619253047CB00A923AC /* CurrentRepositoryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63904618253047CB00A923AC /* CurrentRepositoryInfo.swift */; };
 		6390461E25304FA500A923AC /* GitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6390461D25304FA500A923AC /* GitService.swift */; };
 		63E02A1825344B5C00B3E5C6 /* RepoStarsByDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E02A1725344B5C00B3E5C6 /* RepoStarsByDates.swift */; };
 		63E02A1B25344D6700B3E5C6 /* GitStarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E02A1A25344D6700B3E5C6 /* GitStarService.swift */; };
@@ -54,7 +54,7 @@
 		6382BBB4252C7F1C003DEFB6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		6382BBB5252C7F1C003DEFB6 /* SecondConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondConfigurator.swift; sourceTree = "<group>"; };
 		6382BBC0252C7F7F003DEFB6 /* Second.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Second.storyboard; sourceTree = "<group>"; };
-		63904618253047CB00A923AC /* MyGitRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGitRepo.swift; sourceTree = "<group>"; };
+		63904618253047CB00A923AC /* CurrentRepositoryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRepositoryInfo.swift; sourceTree = "<group>"; };
 		6390461D25304FA500A923AC /* GitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitService.swift; sourceTree = "<group>"; };
 		63E02A1725344B5C00B3E5C6 /* RepoStarsByDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStarsByDates.swift; sourceTree = "<group>"; };
 		63E02A1A25344D6700B3E5C6 /* GitStarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitStarService.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				630A7FED252EEA1E00780A3C /* GitUserData.swift */,
-				63904618253047CB00A923AC /* MyGitRepo.swift */,
+				63904618253047CB00A923AC /* CurrentRepositoryInfo.swift */,
 				63E02A1725344B5C00B3E5C6 /* RepoStarsByDates.swift */,
 				9E3014582535E5E500C21320 /* DatesAndStars.swift */,
 				9E751B9E253EF6750032FD2F /* RealmModels.swift */,
@@ -371,7 +371,7 @@
 				6382BBA6252C5BAE003DEFB6 /* HomePresenter.swift in Sources */,
 				9E751B9F253EF6750032FD2F /* RealmModels.swift in Sources */,
 				6382BBB8252C7F1C003DEFB6 /* SecondViewController.swift in Sources */,
-				63904619253047CB00A923AC /* MyGitRepo.swift in Sources */,
+				63904619253047CB00A923AC /* CurrentRepositoryInfo.swift in Sources */,
 				6382BBB6252C7F1C003DEFB6 /* SecondNavigator.swift in Sources */,
 				6382BBB7252C7F1C003DEFB6 /* SecondPresenter.swift in Sources */,
 				6382BBA8252C5BAE003DEFB6 /* HomeConfigurator.swift in Sources */,

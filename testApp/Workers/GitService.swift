@@ -26,10 +26,10 @@ struct GitService {
 
     // MARK: - Actions
 
-    func loadFacts(completion: @escaping (Result<[MyGitRepo], Error>) -> Void) {
+    func loadFacts(completion: @escaping (Result<[CurrentRepositoryInfo], Error>) -> Void) {
         let url = URL(string: "\(baseUrlString)\(gitLogin)\(gitReposSuffix)")!
         
-        var myGitRepos = [MyGitRepo]()
+        var repositoriesInfo = [CurrentRepositoryInfo]()
         
 
         
@@ -41,9 +41,9 @@ struct GitService {
                 do {
                     let decoder = ZippyJSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    myGitRepos = try decoder.decode([MyGitRepo].self, from: data)
-                    saveLogin(with: myGitRepos)
-                    completion(.success(myGitRepos))
+                    repositoriesInfo = try decoder.decode([CurrentRepositoryInfo].self, from: data)
+                    saveLogin(with: repositoriesInfo)
+                    completion(.success(repositoriesInfo))
                 } catch {
                     print("Error: \(error)")
                     completion(.failure(CommonError.brokenData(data)))
@@ -58,7 +58,7 @@ struct GitService {
         storage.getLogin(by: login)?.repositories
     }
     
-    private func saveLogin(with repos: [MyGitRepo]) {
+    private func saveLogin(with repos: [CurrentRepositoryInfo]) {
         let repositories = repos.map(GithubRepository.init).map(repositoryWithDates)
         let githubLogin = GithubLogin(gitLogin: gitLogin, repositories: repositories)
         storage.saveLogin(githubLogin)

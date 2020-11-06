@@ -23,6 +23,7 @@ extension GithubLogin {
 struct GithubRepository {
     let repoID: String
     let repoName: String
+    let ownerName: String
     let repoStarsTotal: Int
     var starDates: [GithubStarDates]
 }
@@ -31,15 +32,17 @@ extension GithubRepository {
     init(object: RealmGithubRepository) {
         self.init(repoID: object.repoID,
                   repoName: object.repoName,
+                  ownerName: object.ownerName,
                   repoStarsTotal: object.repoStarsTotal,
                   starDates: object.starDates.map(GithubStarDates.init))
     }
 }
 
 extension GithubRepository {
-    init(repo: MyGitRepo) {
+    init(repo: CurrentRepositoryInfo) {
         self.init(repoID: repo.nodeId,
                   repoName: repo.name,
+                  ownerName: repo.owner.login,
                   repoStarsTotal: repo.stargazersCount,
                   starDates: [])
     }
@@ -85,6 +88,7 @@ extension RealmGithubLogin {
 class RealmGithubRepository: Object {
     @objc dynamic var repoID = ""
     @objc dynamic var repoName = ""
+    @objc dynamic var ownerName = ""
     @objc dynamic var repoStarsTotal = 0
     let starDates = List<RealmGithubStarDates>()
     override class func primaryKey() -> String? {
@@ -97,6 +101,7 @@ extension RealmGithubRepository {
         self.init()
         repoID = model.repoID
         repoName = model.repoName
+        ownerName = model.ownerName
         repoStarsTotal = model.repoStarsTotal
         starDates.append(objectsIn: model.starDates.map(RealmGithubStarDates.init))
     }
