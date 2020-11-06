@@ -2,7 +2,7 @@
 //  SecondNavigator.swift
 //  testApp
 //
-//  Created by 1 on 06.10.2020.
+//  Created by Dmitriy Orlov on 06.10.2020.
 //  
 //
 

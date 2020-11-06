@@ -2,7 +2,7 @@
 //  MyGitRepos.swift
 //  testApp
 //
-//  Created by 1 on 09.10.2020.
+//  Created by Dmitriy Orlov on 09.10.2020.
 //
 
 import Foundation

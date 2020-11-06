@@ -131,6 +131,7 @@
 		6382BB89252C5B00003DEFB6 /* testApp */ = {
 			isa = PBXGroup;
 			children = (
+				9E7064672555547D005F5227 /* Network */,
 				9E397E02254FF68900CBB471 /* RealmStorage */,
 				6382BB9F252C5B65003DEFB6 /* Application */,
 				630A7FEC252EE9CB00780A3C /* Model */,
@@ -225,6 +226,13 @@
 				9E397DFD254FF59F00CBB471 /* GithubStorage.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		9E7064672555547D005F5227 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		EC8E5554A4D2DF9639A347B0 /* Frameworks */ = {

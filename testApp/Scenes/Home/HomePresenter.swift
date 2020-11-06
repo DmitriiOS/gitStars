@@ -2,7 +2,7 @@
 //  HomePresenter.swift
 //  testApp
 //
-//  Created by 1 on 06.10.2020.
+//  Created by Dmitriy Orlov on 06.10.2020.
 //  
 //
 import Foundation
@@ -50,7 +50,6 @@ final class HomePresenter {
         repos = []
         repoStarsByDates = []
         datesAndStars = []
-        
         showRepos(repos)
         reloadRepos()
     }
@@ -60,10 +59,10 @@ final class HomePresenter {
         receivedGitRepo = chosenRepo
     }
     
-    func onTextTypedAndLoadFromRealm(messageTyped: String) {
+    func onTextTypedAndLoadFromDB(messageTyped: String) {
         let message = messageTyped
         if let repositories = gitService.fetchRepositories(by: message) {
-            let repos = repositories.map(MyGitRepo.init)
+            repos = repositories.map(MyGitRepo.init)
             view.reloadFactsList(repos)
         }
         gitService.updateGitLogin(login: message)
@@ -98,7 +97,17 @@ final class HomePresenter {
         view.reloadFactsList(repos)
     }
     
-    func reloadStarDates() {
+    func reloadStarDatesFromDB() {
+        guard let repoId = repos.first(where: { $0.name == receivedGitRepo })?.nodeId else {
+            return
+        }
+        if let stars = gitStarService.fetchStarDates(by: repoId) {
+            repoStarsByDates = stars.map(RepoStarsByDates.init)
+            showRepoStars(repoStarsByDates)
+        }
+    }
+    
+    func reloadStarDatesFromAPI() {
 
         guard let repoId = repos.first(where: { $0.name == receivedGitRepo })?.nodeId else {
             return
@@ -110,7 +119,6 @@ final class HomePresenter {
             case .success(let repoStarsByDates):
                 DispatchQueue.main.async {
                     self?.showRepoStars(repoStarsByDates)
-                    self?.view.whenAllDataIsReady()
                 }
             }
         }
@@ -119,6 +127,7 @@ final class HomePresenter {
     private func showRepoStars(_ dates: [RepoStarsByDates]) {
         self.repoStarsByDates = dates
         view.reloadRepoStars(dates)
+        view.whenAllDataIsReady()
     }
 
     // Declare here actions and handlers for events of the View

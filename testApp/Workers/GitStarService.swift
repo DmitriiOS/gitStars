@@ -2,7 +2,7 @@
 //  GitStarService.swift
 //  testApp
 //
-//  Created by 1 on 12.10.2020.
+//  Created by Dmitriy Orlov on 12.10.2020.
 //
 
 import Foundation
@@ -12,8 +12,6 @@ struct GitStarService {
     
     private let baseRepoUrlString = "https://api.github.com/repos/"
     private let gitRepoSuffix = "/stargazers"
-    
-    private let reloadDispatchGroup = DispatchGroup()
     
     private let urlSession = URLSession.shared
     
@@ -26,48 +24,60 @@ struct GitStarService {
         var pageNum = 1
         var repoStarsByDates = [RepoStarsByDates]()
         
-        while pageNum < 5 {
-
-            let url = URL(string: "\(baseRepoUrlString)\(login)/\(repoName)\(gitRepoSuffix)?page=\(pageNum)&per_page=100")!
-
-            var request = URLRequest(url: url)
-            request.addValue("application/vnd.github.v3.star+json", forHTTPHeaderField: "Accept")
-
-            reloadDispatchGroup.enter()
+        DispatchQueue.global().async {
+            let reloadDispatchGroup = DispatchGroup()
             
-            loadDatesFromUrlRequest(request: request) {
-                switch $0 {
-                case .failure(let error):
-                    completion(.failure(error))
-                case .success(let data):
-                    do {
-                        let decoder = ZippyJSONDecoder()
-                        decoder.keyDecodingStrategy = .convertFromSnakeCase
-                        let stars = try decoder.decode([RepoStarsByDates].self, from: data)
-                        repoStarsByDates.append(contentsOf: stars)
-                        print("Loaded")
-                    } catch {
-                        print("Error: \(error)")
-                        completion(.failure(CommonError.brokenData(data)))
+            
+            while pageNum < 5 {
+                
+                let url = URL(string: "\(baseRepoUrlString)\(login)/\(repoName)\(gitRepoSuffix)?page=\(pageNum)&per_page=100")!
+                
+                var request = URLRequest(url: url)
+                request.addValue("application/vnd.github.v3.star+json", forHTTPHeaderField: "Accept")
+                
+                reloadDispatchGroup.enter()
+                
+                loadDatesFromUrlRequest(request: request) {
+                    switch $0 {
+                    case .failure(let error):
+                        completion(.failure(error))
+                    case .success(let data):
+                        do {
+                            let decoder = ZippyJSONDecoder()
+                            decoder.keyDecodingStrategy = .convertFromSnakeCase
+                            let stars = try decoder.decode([RepoStarsByDates].self, from: data)
+                            repoStarsByDates.append(contentsOf: stars)
+                            print("Loaded")
+                        } catch {
+                            print("Error: \(error)")
+                            completion(.failure(CommonError.brokenData(data)))
+                        }
+                        
+                        reloadDispatchGroup.leave()
                     }
-                    
-                    self.reloadDispatchGroup.leave()
                 }
+                
+                reloadDispatchGroup.wait(timeout: .now() + 10.0)
+                pageNum += 1
+                print("Next page \(pageNum)")
             }
             
-            reloadDispatchGroup.wait(timeout: .now() + 30.0)
-            
-            pageNum += 1
-            print("Next page \(pageNum)")
+            DispatchQueue.main.async {
+                storage.saveStarDates(starDates: repoStarsByDates.map(GithubStarDates.init), for: repoId)
+                completion(.success(repoStarsByDates))
+            }
         }
-        
-        storage.saveStarDates(starDates: repoStarsByDates.map(GithubStarDates.init), for: repoId)
-        
-        completion(.success(repoStarsByDates))
-        
     }
     
     // MARK: - Internal
+    
+    func createRequest() {
+        
+    }
+    
+    func fetchStarDates(by repositoryId: String) -> [GithubStarDates]? {
+        storage.getStarDates(by: repositoryId)
+    }
 
     private func loadDatesFromUrl(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         urlSession.dataTask(with: url) { (data, _, error) in

@@ -2,7 +2,7 @@
 //  RepoStarsByDates.swift
 //  testApp
 //
-//  Created by 1 on 12.10.2020.
+//  Created by Dmitriy Orlov on 12.10.2020.
 //
 
 import Foundation
@@ -14,4 +14,12 @@ struct RepoStarsByDates: Decodable {
 
 struct User: Decodable {
     var nodeId: String
+    
+}
+
+extension RepoStarsByDates {
+    init(gitStarDates: GithubStarDates) {
+        self.starredAt = gitStarDates.dates
+        self.user = User(nodeId: gitStarDates.starDatesID)
+    }
 }

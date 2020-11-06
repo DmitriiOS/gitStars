@@ -2,7 +2,7 @@
 //  HomeViewController.swift
 //  testApp
 //
-//  Created by 1 on 06.10.2020.
+//  Created by Dmitriy Orlov on 06.10.2020.
 //  
 //
 
@@ -89,7 +89,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         tableView.isHidden = false
         gitUserData.gitLogin = textField.text ?? ""
         tableView.reloadData()
-        presenter.onTextTypedAndLoadFromRealm(messageTyped: gitUserData.gitLogin)
+        presenter.onTextTypedAndLoadFromDB(messageTyped: gitUserData.gitLogin)
         presenter.onTextTypedAndLoadFromAPI(messageTyped: gitUserData.gitLogin)
         presenter.reloadRepos()
     }
@@ -115,7 +115,8 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         gitUserData.gitChosenRepo = myGitRepos[indexPath.row].name
         chosenRepoIndex = indexPath.row
         presenter.onRepositoryChosen(chosenLogin: gitUserData.gitLogin, chosenRepo: gitUserData.gitChosenRepo)
-        presenter.reloadStarDates()
+        presenter.reloadStarDatesFromDB()
+        presenter.reloadStarDatesFromAPI()
 //        activityIndicatorStop()
     }
     
