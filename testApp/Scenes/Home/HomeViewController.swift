@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     private let kReposCellID = "Cell"
     
     private var repositoriesInfo: [CurrentRepositoryInfo] = []
+    private var currentRepositoryInfo = CurrentRepositoryInfo(nodeId: "", name: "", owner: .init(login: ""), stargazersCount: 0)
     
     var datesAndStars: [DatesAndStars] = []
     private var myRepoStars: [RepoStarsByDates] = []
@@ -89,10 +90,10 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     @IBAction func enterBtnTapped(_ sender: UIButton) {
         tableView.isHidden = false
-        gitUserData.gitLogin = textField.text ?? ""
+        currentRepositoryInfo.owner.login = textField.text ?? ""
         tableView.reloadData()
-        presenter.onTextTypedAndLoadFromDB(messageTyped: gitUserData.gitLogin)
-        presenter.onTextTypedAndLoadFromAPI(messageTyped: gitUserData.gitLogin)
+        presenter.onTextTypedAndLoadFromDB(messageTyped: currentRepositoryInfo.owner.login)
+        presenter.onTextTypedAndLoadFromAPI(messageTyped: currentRepositoryInfo.owner.login)
         presenter.reloadRepos()
     }
     
