@@ -12,6 +12,7 @@ import CalendarDateRangePickerViewController
 
 class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     
+    
 //    var receivedLogin = ""
 //    var receivedRepo = ""
     var currentRepositoryId = ""
@@ -110,6 +111,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     func reloadRepoStars(_ myRepoStars: [RepoStarsByDates]) {
         self.myRepoStars = myRepoStars
         selectedDatesLabel.text = "Выберите даты для графика"
+        datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
     }
     
     func prepareData() {
@@ -129,6 +131,16 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         barChartView.data = data
         let scaleX = CGFloat(50 * (set1.count == 0 ? 1 : set1.count)) / barChartView.bounds.width
         barChartView.zoom(scaleX: scaleX, scaleY: 1, x: 0, y: 0)
+    }
+    
+    func whenAllDataIsReady() {
+        print("ВСЕ ГОТОВО: \(datesAndStars.count)")
+    }
+    
+    func getCurrentRepositoryInfo(currentRepositoryInfo: CurrentRepositoryInfo) {
+        currentRepositoryId = currentRepositoryInfo.nodeId
+        currentRepositoryName = currentRepositoryInfo.name
+        currentRepositoryOwnerLogin = currentRepositoryInfo.owner.login
     }
 }
 
@@ -152,7 +164,7 @@ extension SecondViewController : CalendarDateRangePickerViewControllerDelegate {
         getDatesForChart()
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: datesForChart)
     }
-
+}
 // MARK: - GetDataFromHomeVC
     
 //    func getLoginRepoDatesStars(datesStars: [DatesAndStars], login: String, repository: String) {
@@ -160,10 +172,6 @@ extension SecondViewController : CalendarDateRangePickerViewControllerDelegate {
 //        receivedRepo = repository
 //        datesAndStars = datesStars
 //    }
-    func getCurrentRepositoryInfo(currentRepositoryInfo: CurrentRepositoryInfo) {
-        currentRepositoryId = currentRepositoryInfo.nodeId
-        currentRepositoryName = currentRepositoryInfo.name
-        currentRepositoryOwnerLogin = currentRepositoryInfo.owner.login
-    }
-}
+
+
 

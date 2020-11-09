@@ -85,15 +85,15 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     func reloadRepoStars(_ myRepoStars: [RepoStarsByDates]) {
         self.myRepoStars = myRepoStars
-        datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
+//        datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
     }
     
     @IBAction func enterBtnTapped(_ sender: UIButton) {
         tableView.isHidden = false
         currentRepositoryInfo.owner.login = textField.text ?? ""
         tableView.reloadData()
-        presenter.onTextTypedAndLoadFromDB(messageTyped: currentRepositoryInfo.owner.login)
-        presenter.onTextTypedAndLoadFromAPI(messageTyped: currentRepositoryInfo.owner.login)
+        presenter.loadRepositoriesFromDB(loginTyped: currentRepositoryInfo.owner.login)
+        presenter.loadRepositoriesFromAPI(loginTyped: currentRepositoryInfo.owner.login)
         presenter.reloadRepos()
     }
     
@@ -106,29 +106,31 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kReposCellID) ?? UITableViewCell(style: .default, reuseIdentifier: kReposCellID)
-        let repo = repositoriesInfo[indexPath.row]
-        cell.textLabel?.text = repo.name
-        cell.detailTextLabel?.text = "Количество звезд: \(repo.stargazersCount)"
+        let repository = repositoriesInfo[indexPath.row]
+        cell.textLabel?.text = repository.name
+        cell.detailTextLabel?.text = "Количество звезд: \(repository.stargazersCount)"
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        activityIndicatorStart()
-        gitUserData.gitChosenRepo = repositoriesInfo[indexPath.row].name
-        chosenRepoIndex = indexPath.row
-        presenter.onRepositoryChosen(chosenLogin: gitUserData.gitLogin, chosenRepo: gitUserData.gitChosenRepo)
-        presenter.reloadStarDatesFromDB()
-        presenter.reloadStarDatesFromAPI()
+//        gitUserData.gitChosenRepo = repositoriesInfo[indexPath.row].name
+//        chosenRepoIndex = indexPath.row
+//        presenter.onChosenRepositoryByIndex(index: indexPath.row)
+        currentRepositoryInfo = repositoriesInfo[indexPath.row]
+        presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo)
+//        presenter.reloadStarDatesFromDB()
+//        presenter.reloadStarDatesFromAPI()
 //        activityIndicatorStop()
     }
     
-    func whenAllDataIsReady() {
-        print("ВСЕ ГОТОВО: \(datesAndStars.count)")
+//    func whenAllDataIsReady() {
+//        print("ВСЕ ГОТОВО: \(datesAndStars.count)")
 //        presenter.onRepoSelected(currentRepositoryInfo: <#T##CurrentRepositoryInfo#>)
         
 //        presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo
 //            receivedDatesAndStars: datesAndStars, gitRepoEntered: gitUserData.gitChosenRepo, gitLoginEntered: gitUserData.gitLogin
 //        )
-    }
+//    }
 }
