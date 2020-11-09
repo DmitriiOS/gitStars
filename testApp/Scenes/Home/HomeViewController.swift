@@ -29,7 +29,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     var chosenRepoIndex = 0
     
     @IBOutlet weak var enterButton: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
@@ -47,24 +46,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         datesAndStars = []
         myRepoStars = []
         presenter.viewWillAppear()
-    }
-    
-    // MARK: - Activity Indicator Actions
-    
-    func activityIndicatorStart() {
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
-        textField.isEnabled = false
-        enterButton.isEnabled = false
-        tableView.isHidden = true
-    }
-    
-    func activityIndicatorStop() {
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
-        textField.isEnabled = true
-        enterButton.isEnabled = true
-        tableView.isHidden = false
     }
         
     // MARK: - Setup

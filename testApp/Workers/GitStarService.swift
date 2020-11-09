@@ -16,6 +16,7 @@ struct GitStarService {
     private let urlSession = URLSession.shared
     
     let storage: GithubStorage
+
     
     // MARK: - Actions
 
@@ -63,6 +64,7 @@ struct GitStarService {
             }
             
             DispatchQueue.main.async {
+                print("ЗДЕСЬ ОБНОВИТЬ ЭКРАН")
                 storage.saveStarDates(starDates: repoStarsByDates.map(GithubStarDates.init), for: repoId)
                 completion(.success(repoStarsByDates))
             }

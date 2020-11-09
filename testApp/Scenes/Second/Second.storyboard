@@ -36,6 +36,9 @@
                                 <rect key="frame" x="8" y="101" width="359" height="550"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="RTP-ok-zxo">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zA-Nu-f6x">
                                 <rect key="frame" x="322" y="40" width="45" height="45"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
@@ -60,7 +63,9 @@
                             <constraint firstItem="R2k-1j-fYI" firstAttribute="leading" secondItem="594-nX-ROV" secondAttribute="leading" constant="8" id="G9X-6w-oLU"/>
                             <constraint firstItem="3zA-Nu-f6x" firstAttribute="leading" secondItem="sPS-s4-cef" secondAttribute="trailing" constant="8" id="Go0-AQ-ZHK"/>
                             <constraint firstItem="594-nX-ROV" firstAttribute="bottom" secondItem="R2k-1j-fYI" secondAttribute="bottom" constant="16" id="PIi-wt-sli"/>
+                            <constraint firstItem="RTP-ok-zxo" firstAttribute="centerX" secondItem="264-g3-kky" secondAttribute="centerX" id="Ufc-hs-mWE"/>
                             <constraint firstItem="594-nX-ROV" firstAttribute="trailing" secondItem="R2k-1j-fYI" secondAttribute="trailing" constant="8" id="WJP-wp-wKo"/>
+                            <constraint firstItem="RTP-ok-zxo" firstAttribute="centerY" secondItem="264-g3-kky" secondAttribute="centerY" id="Wa9-RF-Sj9"/>
                             <constraint firstItem="3zA-Nu-f6x" firstAttribute="top" secondItem="SPY-tt-Jif" secondAttribute="bottom" constant="8" id="cHX-he-LsS"/>
                             <constraint firstItem="SPY-tt-Jif" firstAttribute="top" secondItem="594-nX-ROV" secondAttribute="top" constant="8" id="gxR-st-g5s"/>
                             <constraint firstItem="SPY-tt-Jif" firstAttribute="leading" secondItem="594-nX-ROV" secondAttribute="leading" constant="8" id="kNG-Ko-pBM"/>
@@ -70,6 +75,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="RTP-ok-zxo" id="0ae-yR-jBx"/>
                         <outlet property="chartView" destination="R2k-1j-fYI" id="GGo-F2-vZd"/>
                         <outlet property="secondLabel" destination="SPY-tt-Jif" id="lBa-0r-EcK"/>
                         <outlet property="selectDatesBtn" destination="3zA-Nu-f6x" id="VrK-qH-glh"/>

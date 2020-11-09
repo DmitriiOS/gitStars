@@ -17,12 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" id="Usr-2T-eb6">
-                                <rect key="frame" x="147" y="293" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemBlueColor"/>
-                                <color key="color" systemColor="systemBlueColor"/>
-                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7GT-3f-lmg">
                                 <rect key="frame" x="16" y="16" width="343" height="82"/>
                                 <subviews>
@@ -91,7 +85,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="Usr-2T-eb6" id="XV2-FZ-dQT"/>
                         <outlet property="enterButton" destination="ojF-OX-KKg" id="qqH-HE-XZO"/>
                         <outlet property="tableView" destination="78c-B6-KeD" id="L5s-SH-Gv4"/>
                         <outlet property="textField" destination="loJ-Fx-KOI" id="1D7-vn-dKg"/>
@@ -105,9 +98,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

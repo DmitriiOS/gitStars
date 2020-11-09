@@ -12,6 +12,7 @@ protocol GetDataFromHomeVC: AnyObject {
     func getCurrentRepositoryInfo(currentRepositoryInfo: CurrentRepositoryInfo)
     func reloadRepoStars(_ starDates: [RepoStarsByDates])
     func whenAllDataIsReady()
+    func activityIndicatorStop()
 }
 
 protocol SecondView: AnyObject {
@@ -48,8 +49,9 @@ final class SecondPresenter {
 	// MARK: - Actions
 
     func viewWillAppear() {
-        repoStarsByDates = []
-        datesAndStars = []
+        print("НАЧАЛО ВТОРОГО ЭКРАНА")
+//        repoStarsByDates = []
+//        datesAndStars = []
         reloadStarDatesFromDB()
         reloadStarDatesFromAPI()
         view.getCurrentRepositoryInfo(currentRepositoryInfo: currentRepositoryInfo)
@@ -81,6 +83,7 @@ final class SecondPresenter {
         self.repoStarsByDates = dates
         view.reloadRepoStars(dates)
         view.whenAllDataIsReady()
+        view.activityIndicatorStop()
     }
     
     // Declare here actions and handlers for events of the View

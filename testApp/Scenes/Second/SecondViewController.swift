@@ -36,7 +36,8 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     @IBOutlet weak var selectedDatesLabel: UILabel!
     @IBOutlet weak var chartView: UIView!
     @IBOutlet weak var secondLabel: UILabel!
-
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -46,6 +47,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        activityIndicatorStart()
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
         showReceivedData(repo: currentRepositoryName, login: currentRepositoryOwnerLogin)
@@ -55,6 +57,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         barChartView.xAxis.drawLabelsEnabled = true
         barChartView.xAxis.labelPosition = .bottom
         barChartView.xAxis.granularity = 1
+
     }
     
     // MARK: - Setup
@@ -71,6 +74,22 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         selectedDatesLabel.text = "Выберите даты для графика"
 
         // Customize UI structure appearance
+    }
+    
+     // MARK: - Activity Indicator Actions
+    
+    func activityIndicatorStart() {
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+        selectDatesBtn.isEnabled = false
+        chartView.isHidden = true
+    }
+
+    func activityIndicatorStop() {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+        selectDatesBtn.isEnabled = true
+        chartView.isHidden = false
     }
     
     // MARK: - Actions
@@ -132,6 +151,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     
     func whenAllDataIsReady() {
         print("ВСЕ ГОТОВО: \(datesAndStars.count)")
+//        activityIndicatorStop()
     }
     
     func getCurrentRepositoryInfo(currentRepositoryInfo: CurrentRepositoryInfo) {
