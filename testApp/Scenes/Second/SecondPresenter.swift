@@ -63,6 +63,9 @@ final class SecondPresenter {
         repoStarsByDates = []
         datesAndStars = []
 //        view.getLoginRepoDatesStars(datesStars: datesAndStars, login: receivedGitLogin, repository: receivedGitRepo)
+        reloadStarDatesFromDB()
+        reloadStarDatesFromAPI()
+        
         view.getCurrentRepositoryInfo(currentRepositoryInfo: currentRepositoryInfo)
     }
     
