@@ -9,9 +9,7 @@
 import UIKit
 
 protocol HomeNavigator {
-    func toDetails(currentRepositoryInfo: CurrentRepositoryInfo
-//        receivedDatesAndStars: [DatesAndStars], ofGitData: String, gitLogin: String
-    )
+    func toDetails(currentRepositoryInfo: CurrentRepositoryInfo)
 }
 
 final class DefaultHomeNavigator: HomeNavigator {
@@ -26,12 +24,8 @@ final class DefaultHomeNavigator: HomeNavigator {
     
     // MARK: - Navigation
     
-    func toDetails(currentRepositoryInfo: CurrentRepositoryInfo
-//        receivedDatesAndStars: [DatesAndStars], ofGitData: String, gitLogin: String
-    ) {
-        let vc = SecondConfigurator(navigationController: navigationController, currentRepositoryInfo: currentRepositoryInfo
-//                                    datesAndStars: receivedDatesAndStars, receivedGitRepo: ofGitData, receivedGitLogin: gitLogin
-        ).configure()
+    func toDetails(currentRepositoryInfo: CurrentRepositoryInfo) {
+        let vc = SecondConfigurator(navigationController: navigationController, currentRepositoryInfo: currentRepositoryInfo).configure()
         navigationController.pushViewController(vc, animated: true)
     }
     

@@ -85,7 +85,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     func reloadRepoStars(_ myRepoStars: [RepoStarsByDates]) {
         self.myRepoStars = myRepoStars
-//        datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
     }
     
     @IBAction func enterBtnTapped(_ sender: UIButton) {
@@ -114,23 +113,8 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        activityIndicatorStart()
-//        gitUserData.gitChosenRepo = repositoriesInfo[indexPath.row].name
-//        chosenRepoIndex = indexPath.row
-//        presenter.onChosenRepositoryByIndex(index: indexPath.row)
         currentRepositoryInfo = repositoriesInfo[indexPath.row]
         presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo)
-//        presenter.reloadStarDatesFromDB()
-//        presenter.reloadStarDatesFromAPI()
-//        activityIndicatorStop()
     }
-    
-//    func whenAllDataIsReady() {
-//        print("ВСЕ ГОТОВО: \(datesAndStars.count)")
-//        presenter.onRepoSelected(currentRepositoryInfo: <#T##CurrentRepositoryInfo#>)
-        
-//        presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo
-//            receivedDatesAndStars: datesAndStars, gitRepoEntered: gitUserData.gitChosenRepo, gitLoginEntered: gitUserData.gitLogin
-//        )
-//    }
+
 }

@@ -12,9 +12,6 @@ import CalendarDateRangePickerViewController
 
 class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     
-    
-//    var receivedLogin = ""
-//    var receivedRepo = ""
     var currentRepositoryId = ""
     var currentRepositoryName = ""
     var currentRepositoryOwnerLogin = ""
@@ -165,13 +162,7 @@ extension SecondViewController : CalendarDateRangePickerViewControllerDelegate {
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: datesForChart)
     }
 }
-// MARK: - GetDataFromHomeVC
-    
-//    func getLoginRepoDatesStars(datesStars: [DatesAndStars], login: String, repository: String) {
-//        receivedLogin = login
-//        receivedRepo = repository
-//        datesAndStars = datesStars
-//    }
+
 
 
 

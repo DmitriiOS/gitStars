@@ -8,10 +8,6 @@
 import Foundation
 import ZippyJSON
 
-//protocol GetGitLogin {
-//    func updateGitLogin(login: String)
-//}
-
 struct GitService {
     
     private let baseUrlString = "https://api.github.com/users/"

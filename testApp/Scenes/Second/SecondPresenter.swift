@@ -9,7 +9,6 @@
 import  Foundation
 
 protocol GetDataFromHomeVC: AnyObject {
-//    func getLoginRepoDatesStars(datesStars: [DatesAndStars], login: String, repository: String)
     func getCurrentRepositoryInfo(currentRepositoryInfo: CurrentRepositoryInfo)
     func reloadRepoStars(_ starDates: [RepoStarsByDates])
     func whenAllDataIsReady()
@@ -30,9 +29,6 @@ final class SecondPresenter {
     var starDatesService: StarDatesService
     private var repoStarsByDates: [RepoStarsByDates] = []
     private var datesAndStars: [DatesAndStars] = []
-//    private var datesAndStars: [DatesAndStars] = []
-//    private var receivedGitRepo: String
-//    private var receivedGitLogin: String
 
 	// MARK: - Lifecycle
 
@@ -40,20 +36,12 @@ final class SecondPresenter {
          navigator: SecondNavigator,
          currentRepositoryInfo: CurrentRepositoryInfo,
          gitStarService: GitStarService,
-         starDatesService: StarDatesService
-//         datesAndStars: [DatesAndStars],
-//         receivedGitRepo: String,
-//         receivedGitLogin: String
-    ) {
+         starDatesService: StarDatesService) {
 		self.view = view
 		self.navigator = navigator
         self.currentRepositoryInfo = currentRepositoryInfo
         self.gitStarService = gitStarService
         self.starDatesService = starDatesService
-//        self.datesAndStars = datesAndStars
-//        self.receivedGitRepo = receivedGitRepo
-//        self.receivedGitLogin = receivedGitLogin
-
 	}
 
 
@@ -62,19 +50,14 @@ final class SecondPresenter {
     func viewWillAppear() {
         repoStarsByDates = []
         datesAndStars = []
-//        view.getLoginRepoDatesStars(datesStars: datesAndStars, login: receivedGitLogin, repository: receivedGitRepo)
         reloadStarDatesFromDB()
         reloadStarDatesFromAPI()
-        
         view.getCurrentRepositoryInfo(currentRepositoryInfo: currentRepositoryInfo)
     }
     
     // MARK: - Internal actions
     
     func reloadStarDatesFromDB() {
-//        guard let repoId = repositoriesInfo.first(where: { $0.name == receivedGitRepo })?.nodeId else {
-//            return
-//        }
         if let stars = gitStarService.fetchStarDates(by: currentRepositoryInfo.nodeId) {
             repoStarsByDates = stars.map(RepoStarsByDates.init)
             showRepoStars(repoStarsByDates)
@@ -82,10 +65,6 @@ final class SecondPresenter {
     }
     
     func reloadStarDatesFromAPI() {
-
-//        guard let repoId = repositoriesInfo.first(where: { $0.name == receivedGitRepo })?.nodeId else {
-//            return
-//        }
         self.gitStarService.loadRepoDates(login: currentRepositoryInfo.owner.login, repoName: currentRepositoryInfo.name, repoId: currentRepositoryInfo.nodeId) { [weak self] in
             switch $0 {
             case .failure(_):

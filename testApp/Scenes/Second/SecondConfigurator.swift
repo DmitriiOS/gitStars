@@ -17,20 +17,12 @@ final class SecondConfigurator {
     private let storyboard = UIStoryboard(name: "Second", bundle: nil)
     private var navigationController: UINavigationController
     private var currentRepositoryInfo: CurrentRepositoryInfo
-//    private var receivedGitRepo: String
-//    private var receivedGitLogin: String
-//    private var datesAndStars: [DatesAndStars]
     
     // MARK: - Lifecycle
     
-    init(navigationController: UINavigationController, currentRepositoryInfo: CurrentRepositoryInfo
-//         datesAndStars: [DatesAndStars], receivedGitRepo: String, receivedGitLogin: String
-    ) {
+    init(navigationController: UINavigationController, currentRepositoryInfo: CurrentRepositoryInfo) {
         self.navigationController = navigationController
         self.currentRepositoryInfo = currentRepositoryInfo
-//        self.datesAndStars = datesAndStars
-//        self.receivedGitRepo = receivedGitRepo
-//        self.receivedGitLogin = receivedGitLogin
     }
     
     // MARK: - Configuration
@@ -45,11 +37,7 @@ final class SecondConfigurator {
                                        navigator: navigator,
                                        currentRepositoryInfo: currentRepositoryInfo,
                                        gitStarService: gitStarService,
-                                       starDatesService: starDatesService
-//                                       datesAndStars: datesAndStars,
-//                                       receivedGitRepo: receivedGitRepo,
-//                                       receivedGitLogin: receivedGitLogin
-        )
+                                       starDatesService: starDatesService)
         return vc
     }
 }

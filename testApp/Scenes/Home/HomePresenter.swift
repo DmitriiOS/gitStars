@@ -10,8 +10,6 @@ import Foundation
 
 protocol HomeView: AnyObject {
     func reloadFactsList(_ factNames: [CurrentRepositoryInfo])
-//    func reloadRepoStars(_ starDates: [RepoStarsByDates])
-//    func whenAllDataIsReady()
 }
 
 final class HomePresenter {
@@ -23,10 +21,6 @@ final class HomePresenter {
 	private unowned var view: HomeView
 	private let navigator: HomeNavigator
     private var gitService: GitService
-//    private var gitStarService: GitStarService
-//    private var repoStarsByDates: [RepoStarsByDates] = []
-//    var starDatesService: StarDatesService
-//    private var datesAndStars: [DatesAndStars] = []
 
     private var receivedGitRepo: String = ""
     private var receivedGitLogin: String = ""
@@ -35,15 +29,10 @@ final class HomePresenter {
 
     init(view: HomeView,
          navigator: HomeNavigator,
-         gitService: GitService
-//         gitStarService: GitStarService,
-//         starDatesService: StarDatesService
-    ) {
+         gitService: GitService) {
 		self.view = view
 		self.navigator = navigator
         self.gitService = gitService
-//        self.gitStarService = gitStarService
-//        self.starDatesService = starDatesService
 	}
 
 
@@ -51,20 +40,9 @@ final class HomePresenter {
     
     func viewWillAppear() {
         repositoriesInfo = []
-//        repoStarsByDates = []
-//        datesAndStars = []
         showRepos(repositoriesInfo)
         reloadRepos()
     }
-    
-//    func onChosenRepositoryByIndex(chosenLogin: String, chosenRepo: String) {
-//        receivedGitLogin = chosenLogin
-//        receivedGitRepo = chosenRepo
-//    }
-    
-//    func onChosenRepositoryByIndex(index: Int) {
-//        currentRepositoryInfo = repositoriesInfo[index]
-//    }
     
     func loadRepositoriesFromDB(loginTyped: String) {
         let login = loginTyped
@@ -80,13 +58,8 @@ final class HomePresenter {
         gitService.updateGitLogin(login: login)
     }
     
-    func onRepoSelected(currentRepositoryInfo: CurrentRepositoryInfo
-//        receivedDatesAndStars: [DatesAndStars], gitRepoEntered: String, gitLoginEntered: String
-    ) {
-
-        navigator.toDetails(currentRepositoryInfo: currentRepositoryInfo
-//            receivedDatesAndStars: receivedDatesAndStars, ofGitData: gitRepoEntered, gitLogin: gitLoginEntered
-        )
+    func onRepoSelected(currentRepositoryInfo: CurrentRepositoryInfo) {
+        navigator.toDetails(currentRepositoryInfo: currentRepositoryInfo)
     }
     
     // MARK: - Internal actions
@@ -108,39 +81,6 @@ final class HomePresenter {
         self.repositoriesInfo = repos
         view.reloadFactsList(repos)
     }
-    
-//    func reloadStarDatesFromDB() {
-//        guard let repoId = repositoriesInfo.first(where: { $0.name == receivedGitRepo })?.nodeId else {
-//            return
-//        }
-//        if let stars = gitStarService.fetchStarDates(by: repoId) {
-//            repoStarsByDates = stars.map(RepoStarsByDates.init)
-//            showRepoStars(repoStarsByDates)
-//        }
-//    }
-//
-//    func reloadStarDatesFromAPI() {
-//
-//        guard let repoId = repositoriesInfo.first(where: { $0.name == receivedGitRepo })?.nodeId else {
-//            return
-//        }
-//        self.gitStarService.loadRepoDates(login: receivedGitLogin, repoName: receivedGitRepo, repoId: repoId) { [weak self] in
-//            switch $0 {
-//            case .failure(_):
-//                break
-//            case .success(let repoStarsByDates):
-//                DispatchQueue.main.async {
-//                    self?.showRepoStars(repoStarsByDates)
-//                }
-//            }
-//        }
-//    }
-//
-//    private func showRepoStars(_ dates: [RepoStarsByDates]) {
-//        self.repoStarsByDates = dates
-//        view.reloadRepoStars(dates)
-//        view.whenAllDataIsReady()
-//    }
 
     // Declare here actions and handlers for events of the View
 }
