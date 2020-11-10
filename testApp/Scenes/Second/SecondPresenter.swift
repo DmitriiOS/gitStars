@@ -50,8 +50,6 @@ final class SecondPresenter {
 
     func viewWillAppear() {
         print("НАЧАЛО ВТОРОГО ЭКРАНА")
-//        repoStarsByDates = []
-//        datesAndStars = []
         reloadStarDatesFromDB()
         reloadStarDatesFromAPI()
         view.getCurrentRepositoryInfo(currentRepositoryInfo: currentRepositoryInfo)
@@ -62,7 +60,11 @@ final class SecondPresenter {
     func reloadStarDatesFromDB() {
         if let stars = gitStarService.fetchStarDates(by: currentRepositoryInfo.nodeId) {
             repoStarsByDates = stars.map(RepoStarsByDates.init)
-            showRepoStars(repoStarsByDates)
+            if repoStarsByDates.count > 0 {
+                showRepoStars(repoStarsByDates)
+            } else {
+                reloadStarDatesFromAPI()
+            }
         }
     }
     

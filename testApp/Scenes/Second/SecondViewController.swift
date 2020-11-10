@@ -47,8 +47,8 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        activityIndicatorStart()
         super.viewWillAppear(animated)
+        activityIndicatorStart()
         presenter.viewWillAppear()
         showReceivedData(repo: currentRepositoryName, login: currentRepositoryOwnerLogin)
         getDatesForChart()
