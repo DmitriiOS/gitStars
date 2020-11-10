@@ -11,11 +11,9 @@ import Charts
 import CalendarDateRangePickerViewController
 
 class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
-    
     var currentRepositoryId = ""
     var currentRepositoryName = ""
     var currentRepositoryOwnerLogin = ""
-    
     var datesForChart: [String] = []
     var startDateDate = Date()
     var endDateDate = Date()
@@ -57,13 +55,11 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         barChartView.xAxis.drawLabelsEnabled = true
         barChartView.xAxis.labelPosition = .bottom
         barChartView.xAxis.granularity = 1
-
     }
     
     // MARK: - Setup
     
     private func prepareUI() {
-        
         selectDatesBtn.layer.cornerRadius = 10
         selectedDatesLabel.layer.cornerRadius = 10
         selectedDatesLabel.layer.masksToBounds = true
@@ -72,7 +68,6 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         barChartView.widthAnchor.constraint(equalTo: chartView.widthAnchor).isActive = true
         barChartView.heightAnchor.constraint(equalTo: chartView.heightAnchor).isActive = true
         selectedDatesLabel.text = "Выберите даты для графика"
-
         // Customize UI structure appearance
     }
     
@@ -151,7 +146,6 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
     
     func whenAllDataIsReady() {
         print("ВСЕ ГОТОВО: \(datesAndStars.count)")
-//        activityIndicatorStop()
     }
     
     func getCurrentRepositoryInfo(currentRepositoryInfo: CurrentRepositoryInfo) {

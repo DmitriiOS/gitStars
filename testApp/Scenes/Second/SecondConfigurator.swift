@@ -13,7 +13,6 @@ import UIKit
 // swiftlint:disable force_unwrapping
 
 final class SecondConfigurator {
-    
     private let storyboard = UIStoryboard(name: "Second", bundle: nil)
     private var navigationController: UINavigationController
     private var currentRepositoryInfo: CurrentRepositoryInfo

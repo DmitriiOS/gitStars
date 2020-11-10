@@ -13,7 +13,6 @@ protocol HomeNavigator {
 }
 
 final class DefaultHomeNavigator: HomeNavigator {
-
     private unowned var navigationController: UINavigationController
     
     // MARK: - Lifecycle
@@ -28,8 +27,6 @@ final class DefaultHomeNavigator: HomeNavigator {
         let vc = SecondConfigurator(navigationController: navigationController, currentRepositoryInfo: currentRepositoryInfo).configure()
         navigationController.pushViewController(vc, animated: true)
     }
-    
     // Declare here navigation actions
-
 }
 

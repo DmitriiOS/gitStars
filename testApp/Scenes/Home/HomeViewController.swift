@@ -12,13 +12,9 @@ import UIKit
 class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITableViewDataSource {
 
 	var presenter: HomePresenter!
-    var gitUserData: GitUserData = GitUserData.init(gitLogin: "", gitChosenRepo: "")
     private let kReposCellID = "Cell"
-    
     private var repositoriesInfo: [CurrentRepositoryInfo] = []
     private var currentRepositoryInfo = CurrentRepositoryInfo(nodeId: "", name: "", owner: .init(login: ""), stargazersCount: 0)
-    
-    var datesAndStars: [DatesAndStars] = []
     private var myRepoStars: [RepoStarsByDates] = []
     var realmGithubLogin = RealmGithubLogin()
     var realmGithubRepository = RealmGithubRepository()
@@ -36,14 +32,13 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.text = "github"
+//        textField.text = "github"
         prepareUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         repositoriesInfo = []
-        datesAndStars = []
         myRepoStars = []
         presenter.viewWillAppear()
     }
@@ -77,7 +72,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         presenter.reloadRepos()
     }
     
-    
     // MARK: - UITableViewDataSource/Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,7 +85,6 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         cell.detailTextLabel?.text = "Количество звезд: \(repository.stargazersCount)"
         return cell
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentRepositoryInfo = repositoriesInfo[indexPath.row]

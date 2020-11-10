@@ -13,7 +13,6 @@ import UIKit
 // swiftlint:disable force_unwrapping
 
 final class HomeConfigurator {
-    
     private let storyboard = UIStoryboard(name: "Home", bundle: nil)
     
     // MARK: - Lifecycle

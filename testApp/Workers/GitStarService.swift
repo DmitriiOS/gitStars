@@ -12,32 +12,22 @@ struct GitStarService {
     
     private let baseRepoUrlString = "https://api.github.com/repos/"
     private let gitRepoSuffix = "/stargazers"
-    
     private let urlSession = URLSession.shared
-    
     let storage: GithubStorage
-
     
     // MARK: - Actions
 
     func loadRepoDates(login: String, repoName: String, repoId: String, completion: @escaping (Result<[RepoStarsByDates], Error>) -> Void) {
-        
         var pageNum = 1
         var repoStarsByDates = [RepoStarsByDates]()
         
         DispatchQueue.global().async {
             let reloadDispatchGroup = DispatchGroup()
-            
-            
             while pageNum < 5 {
-                
                 let url = URL(string: "\(baseRepoUrlString)\(login)/\(repoName)\(gitRepoSuffix)?page=\(pageNum)&per_page=100")!
-                
                 var request = URLRequest(url: url)
                 request.addValue("application/vnd.github.v3.star+json", forHTTPHeaderField: "Accept")
-                
                 reloadDispatchGroup.enter()
-                
                 loadDatesFromUrlRequest(request: request) {
                     switch $0 {
                     case .failure(let error):
@@ -53,7 +43,6 @@ struct GitStarService {
                             print("Error: \(error)")
                             completion(.failure(CommonError.brokenData(data)))
                         }
-                        
                         reloadDispatchGroup.leave()
                     }
                 }
@@ -73,9 +62,9 @@ struct GitStarService {
     
     // MARK: - Internal
     
-    func createRequest() {
-        
-    }
+//    func createRequest() {
+//
+//    }
     
     func fetchStarDates(by repositoryId: String) -> [GithubStarDates]? {
         storage.getStarDates(by: repositoryId)
@@ -98,8 +87,8 @@ struct GitStarService {
             if let err = error {
                 completion(.failure(err))
             } else if let data = data {
-                let httpResponse = response as! HTTPURLResponse
-                print("Next: \(httpResponse.allHeaderFields["Link"])")
+//                let httpResponse = response as! HTTPURLResponse
+//                print("Next: \(httpResponse.allHeaderFields["Link"])")
                 completion(.success(data))
             } else {
                 completion(.failure(CommonError.noData))
@@ -112,7 +101,6 @@ struct GitStarService {
     enum CommonError: LocalizedError {
         case noData
         case brokenData(Data)
-
         var errorDescription: String? {
             switch self {
             case .noData:
@@ -126,6 +114,4 @@ struct GitStarService {
             }
         }
     }
-    
-    
 }

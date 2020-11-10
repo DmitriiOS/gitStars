@@ -21,15 +21,12 @@ protocol SecondView: AnyObject {
 }
 
 final class SecondPresenter {
-
 	private unowned var view: GetDataFromHomeVC
 	private let navigator: SecondNavigator
     private let currentRepositoryInfo: CurrentRepositoryInfo
-    
     private var gitStarService: GitStarService
     var starDatesService: StarDatesService
     private var repoStarsByDates: [RepoStarsByDates] = []
-    private var datesAndStars: [DatesAndStars] = []
 
 	// MARK: - Lifecycle
 

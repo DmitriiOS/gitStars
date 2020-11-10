@@ -16,12 +16,10 @@ final class HomePresenter {
     
     private var repositoriesInfo: [CurrentRepositoryInfo] = []
     private var currentRepositoryInfo = CurrentRepositoryInfo(nodeId: "", name: "", owner: .init(login: ""), stargazersCount: 0)
-    
     private let reloadDispatchGroup = DispatchGroup()
 	private unowned var view: HomeView
 	private let navigator: HomeNavigator
     private var gitService: GitService
-
     private var receivedGitRepo: String = ""
     private var receivedGitLogin: String = ""
 
@@ -34,7 +32,6 @@ final class HomePresenter {
 		self.navigator = navigator
         self.gitService = gitService
 	}
-
 
 	// MARK: - Actions
     

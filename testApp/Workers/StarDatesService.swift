@@ -13,7 +13,6 @@ protocol DateOptimizer {
 
 final class StarDatesService: DateOptimizer {
     var datesAndStars: [DatesAndStars] = []
-    
     func dateOptimizer(_ datesString: [RepoStarsByDates]) -> [DatesAndStars] {
         var datesDate: [Date] = []
         var stringDate = ""

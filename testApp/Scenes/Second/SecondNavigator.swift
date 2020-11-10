@@ -13,7 +13,6 @@ protocol SecondNavigator {
 }
 
 final class DefaultSecondNavigator: SecondNavigator {
-
     private unowned var navigationController: UINavigationController
     
     // MARK: - Lifecycle
