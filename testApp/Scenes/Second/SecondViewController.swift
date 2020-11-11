@@ -55,6 +55,8 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         barChartView.xAxis.drawLabelsEnabled = true
         barChartView.xAxis.labelPosition = .bottom
         barChartView.xAxis.granularity = 1
+        
+//        loadDefaultChart()
     }
     
     // MARK: - Setup
@@ -153,6 +155,22 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         currentRepositoryName = currentRepositoryInfo.name
         currentRepositoryOwnerLogin = currentRepositoryInfo.owner.login
     }
+    
+//    func loadDefaultChart() {
+//        let firstDate = UserSettings.startDate
+//        let secondDate = UserSettings.endDate
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = .medium
+//        startDateDate = firstDate ?? Date()
+//        endDateDate = secondDate ?? Date()
+//        let startDateString = dateFormatter.string(from: firstDate ?? Date())
+//        let endDateString = dateFormatter.string(from: secondDate ?? Date())
+//        selectedDatesLabel.text = "Statistics from \(startDateString) \nto \(endDateString) is ready"
+//        prepareData()
+//        setData()
+//        getDatesForChart()
+//        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: datesForChart)
+//    }
 }
 
 // MARK: - Range Dates Calendar
@@ -166,6 +184,8 @@ extension SecondViewController : CalendarDateRangePickerViewControllerDelegate {
         dateFormatter.dateStyle = .medium
         startDateDate = startDate
         endDateDate = endDate
+//        UserSettings.startDate = startDate
+//        UserSettings.endDate = endDate
         let startDateString = dateFormatter.string(from: startDate)
         let endDateString = dateFormatter.string(from: endDate)
         selectedDatesLabel.text = "Statistics from \(startDateString) \nto \(endDateString) is ready"

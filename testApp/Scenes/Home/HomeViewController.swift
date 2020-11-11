@@ -23,6 +23,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     var githubRepository: GithubRepository!
     var githubStarDates: GithubStarDates!
     var chosenRepoIndex = 0
+    var defaultChartLoading = false
     
     @IBOutlet weak var enterButton: UIButton!
     @IBOutlet weak var textField: UITextField!
@@ -32,15 +33,21 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        textField.text = "github"
+        defaultChartLoading = true
+        textField.text = UserSettings.currentLogin
         prepareUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        repositoriesInfo = []
         myRepoStars = []
         presenter.viewWillAppear()
+        enterButtonActions()
+        if defaultChartLoading && textField.text != "" {
+            currentRepositoryInfo = repositoriesInfo[UserSettings.cellIndexPath]
+            presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo)
+        }
+        defaultChartLoading = false
     }
         
     // MARK: - Setup
@@ -63,13 +70,18 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         self.myRepoStars = myRepoStars
     }
     
-    @IBAction func enterBtnTapped(_ sender: UIButton) {
+    func enterButtonActions() {
         tableView.isHidden = false
+        UserSettings.currentLogin = textField.text ?? ""
         currentRepositoryInfo.owner.login = textField.text ?? ""
         tableView.reloadData()
         presenter.loadRepositoriesFromDB(loginTyped: currentRepositoryInfo.owner.login)
         presenter.loadRepositoriesFromAPI(loginTyped: currentRepositoryInfo.owner.login)
         presenter.reloadRepos()
+    }
+    
+    @IBAction func enterBtnTapped(_ sender: UIButton) {
+        enterButtonActions()
     }
     
     // MARK: - UITableViewDataSource/Delegate
@@ -87,6 +99,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UserSettings.cellIndexPath = indexPath.row
         currentRepositoryInfo = repositoriesInfo[indexPath.row]
         presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo)
     }
