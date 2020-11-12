@@ -72,7 +72,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         // Customize UI structure appearance
     }
     
-     // MARK: - Activity Indicator Actions
+    // MARK: - Activity Indicator Actions
     
     func activityIndicatorStart() {
         activityIndicator.startAnimating()
@@ -80,7 +80,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         selectDatesBtn.isEnabled = false
         chartView.isHidden = true
     }
-
+    
     func activityIndicatorStop() {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
@@ -99,8 +99,8 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         dateRangePickerViewController.maximumDate = lastDate
         dateRangePickerViewController.selectedStartDate = firstDate ?? Date()
         dateRangePickerViewController.selectedEndDate = lastDate
-//        dateRangePickerViewController.selectedColor = UIColor.red
-//        dateRangePickerViewController.titleText = "Select Date Range"
+        //        dateRangePickerViewController.selectedColor = UIColor.red
+        //        dateRangePickerViewController.titleText = "Select Date Range"
         let navigationController = UINavigationController(rootViewController: dateRangePickerViewController)
         self.navigationController?.present(navigationController, animated: true, completion: nil)
     }

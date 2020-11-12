@@ -24,5 +24,5 @@ final class DefaultSecondNavigator: SecondNavigator {
     // MARK: - Navigation
     
     // Declare here navigation actions
-
+    
 }

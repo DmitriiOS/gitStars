@@ -34,13 +34,13 @@ final class StarDatesService: DateOptimizer {
             datesAndStars.append(DatesAndStars(dates: startDate))
             startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
         }
-            for x in 0..<datesAndStars.count {
-                for i in 0..<datesDate.count {
-                    if datesAndStars[x].dates == datesDate[i] {
-                        datesAndStars[x].stars += 1
-                    }
+        for x in 0..<datesAndStars.count {
+            for i in 0..<datesDate.count {
+                if datesAndStars[x].dates == datesDate[i] {
+                    datesAndStars[x].stars += 1
                 }
             }
+        }
         return datesAndStars
     }
 }

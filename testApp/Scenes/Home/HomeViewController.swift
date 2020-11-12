@@ -10,8 +10,8 @@ import UIKit
 
 
 class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITableViewDataSource {
-
-	var presenter: HomePresenter!
+    
+    var presenter: HomePresenter!
     private let kReposCellID = "Cell"
     private var repositoriesInfo: [CurrentRepositoryInfo] = []
     private var currentRepositoryInfo = CurrentRepositoryInfo(nodeId: "", name: "", owner: .init(login: ""), stargazersCount: 0)
@@ -49,7 +49,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         }
         defaultChartLoading = false
     }
-        
+    
     // MARK: - Setup
     
     private func prepareUI() {
@@ -103,5 +103,5 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         currentRepositoryInfo = repositoriesInfo[indexPath.row]
         presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo)
     }
-
+    
 }

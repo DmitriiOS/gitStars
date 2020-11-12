@@ -17,23 +17,23 @@ final class HomePresenter {
     private var repositoriesInfo: [CurrentRepositoryInfo] = []
     private var currentRepositoryInfo = CurrentRepositoryInfo(nodeId: "", name: "", owner: .init(login: ""), stargazersCount: 0)
     private let reloadDispatchGroup = DispatchGroup()
-	private unowned var view: HomeView
-	private let navigator: HomeNavigator
+    private unowned var view: HomeView
+    private let navigator: HomeNavigator
     private var gitService: GitService
     private var receivedGitRepo: String = ""
     private var receivedGitLogin: String = ""
-
-	// MARK: - Lifecycle
-
+    
+    // MARK: - Lifecycle
+    
     init(view: HomeView,
          navigator: HomeNavigator,
          gitService: GitService) {
-		self.view = view
-		self.navigator = navigator
+        self.view = view
+        self.navigator = navigator
         self.gitService = gitService
-	}
-
-	// MARK: - Actions
+    }
+    
+    // MARK: - Actions
     
     func viewWillAppear() {
         repositoriesInfo = []
@@ -60,7 +60,7 @@ final class HomePresenter {
     }
     
     // MARK: - Internal actions
-
+    
     func reloadRepos() {
         self.gitService.loadFacts { [weak self] in
             switch $0 {
@@ -78,6 +78,6 @@ final class HomePresenter {
         self.repositoriesInfo = repos
         view.reloadFactsList(repos)
     }
-
+    
     // Declare here actions and handlers for events of the View
 }

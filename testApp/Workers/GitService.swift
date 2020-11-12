@@ -19,15 +19,15 @@ struct GitService {
     mutating func updateGitLogin(login: String) {
         gitLogin = login
     }
-
+    
     // MARK: - Actions
-
+    
     func loadFacts(completion: @escaping (Result<[CurrentRepositoryInfo], Error>) -> Void) {
         let url = URL(string: "\(baseUrlString)\(gitLogin)\(gitReposSuffix)")!
         
         var repositoriesInfo = [CurrentRepositoryInfo]()
         
-
+        
         
         loadFromUrl(url: url) {
             switch $0 {
@@ -77,13 +77,13 @@ struct GitService {
             }
         }.resume()
     }
-
+    
     // MARK: - Subtypes
-
+    
     enum CommonError: LocalizedError {
         case noData
         case brokenData(Data)
-
+        
         var errorDescription: String? {
             switch self {
             case .noData:

@@ -41,7 +41,7 @@ struct RealmStorage: GithubStorage {
     func getStarDates(by repoId: String) -> [GithubStarDates]? {
         getRepository(by: repoId)?.starDates
     }
-   
+    
     func commitToRealm(object: Object) {
         do {
             let realm = try Realm()

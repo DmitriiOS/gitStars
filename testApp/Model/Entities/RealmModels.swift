@@ -51,7 +51,7 @@ extension GithubRepository {
 struct GithubStarDates {
     let starDatesID: String
     let dates: String
-
+    
 }
 
 extension GithubStarDates {

@@ -16,7 +16,7 @@ struct GitStarService {
     let storage: GithubStorage
     
     // MARK: - Actions
-
+    
     func loadRepoDates(login: String, repoName: String, repoId: String, completion: @escaping (Result<[RepoStarsByDates], Error>) -> Void) {
         var pageNum = 1
         var repoStarsByDates = [RepoStarsByDates]()
@@ -62,14 +62,14 @@ struct GitStarService {
     
     // MARK: - Internal
     
-//    func createRequest() {
-//
-//    }
+    //    func createRequest() {
+    //
+    //    }
     
     func fetchStarDates(by repositoryId: String) -> [GithubStarDates]? {
         storage.getStarDates(by: repositoryId)
     }
-
+    
     private func loadDatesFromUrl(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         urlSession.dataTask(with: url) { (data, _, error) in
             if let err = error {
@@ -81,23 +81,23 @@ struct GitStarService {
             }
         }.resume()
     }
-
+    
     private func loadDatesFromUrlRequest(request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) {
         urlSession.dataTask(with: request) { (data, response, error) in
             if let err = error {
                 completion(.failure(err))
             } else if let data = data {
-//                let httpResponse = response as! HTTPURLResponse
-//                print("Next: \(httpResponse.allHeaderFields["Link"])")
+                //                let httpResponse = response as! HTTPURLResponse
+                //                print("Next: \(httpResponse.allHeaderFields["Link"])")
                 completion(.success(data))
             } else {
                 completion(.failure(CommonError.noData))
             }
         }.resume()
     }
-
+    
     // MARK: - Subtypes
-
+    
     enum CommonError: LocalizedError {
         case noData
         case brokenData(Data)

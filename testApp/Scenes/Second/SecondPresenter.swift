@@ -21,30 +21,30 @@ protocol SecondView: AnyObject {
 }
 
 final class SecondPresenter {
-	private unowned var view: GetDataFromHomeVC
-	private let navigator: SecondNavigator
+    private unowned var view: GetDataFromHomeVC
+    private let navigator: SecondNavigator
     private let currentRepositoryInfo: CurrentRepositoryInfo
     private var gitStarService: GitStarService
     var starDatesService: StarDatesService
     private var repoStarsByDates: [RepoStarsByDates] = []
-
-	// MARK: - Lifecycle
-
+    
+    // MARK: - Lifecycle
+    
     init(view: GetDataFromHomeVC,
          navigator: SecondNavigator,
          currentRepositoryInfo: CurrentRepositoryInfo,
          gitStarService: GitStarService,
          starDatesService: StarDatesService) {
-		self.view = view
-		self.navigator = navigator
+        self.view = view
+        self.navigator = navigator
         self.currentRepositoryInfo = currentRepositoryInfo
         self.gitStarService = gitStarService
         self.starDatesService = starDatesService
-	}
-
-
-	// MARK: - Actions
-
+    }
+    
+    
+    // MARK: - Actions
+    
     func viewWillAppear() {
         print("НАЧАЛО ВТОРОГО ЭКРАНА")
         reloadStarDatesFromDB()
