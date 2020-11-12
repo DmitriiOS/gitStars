@@ -44,32 +44,4 @@ final class UserSettings {
         }
     }
     
-//    static var startDate: Date! {
-//        get {
-//            return UserDefaults.standard.object(forKey: KeysForDefaults.startDate.rawValue) as? Date
-//        } set {
-//            let defaults = UserDefaults.standard
-//            let key = KeysForDefaults.startDate.rawValue
-//            if let start = newValue {
-//                defaults.set(start, forKey: key)
-//            } else {
-//                defaults.removeObject(forKey: key)
-//            }
-//        }
-//    }
-//    
-//    static var endDate: Date! {
-//        get {
-//            return UserDefaults.standard.object(forKey: KeysForDefaults.endDate.rawValue) as? Date
-//        } set {
-//            let defaults = UserDefaults.standard
-//            let key = KeysForDefaults.endDate.rawValue
-//            if let end = newValue {
-//                defaults.set(end, forKey: key)
-//            } else {
-//                defaults.removeObject(forKey: key)
-//            }
-//        }
-//    }
-    
 }
