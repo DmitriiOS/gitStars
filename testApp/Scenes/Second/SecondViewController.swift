@@ -131,7 +131,7 @@ class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
         barChartDataEntry.removeAll()
         cutDatesAndStars = datesAndStars.filter { $0.dates >= startDateDate && $0.dates <= endDateDate }
         for i in 0..<cutDatesAndStars.count {
-            barChartDataEntry.append(BarChartDataEntry(x: Double(i), y: Double(cutDatesAndStars[i].stars)))
+            barChartDataEntry.append(BarChartDataEntry(x: Double(i), y: Double(cutDatesAndStars[i].starsCount)))
         }
     }
     

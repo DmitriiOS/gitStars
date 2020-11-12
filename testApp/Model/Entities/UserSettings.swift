@@ -11,7 +11,7 @@ final class UserSettings {
     
     private enum KeysForDefaults: String {
         case currentLogin
-        case cellIndexPath
+        case currentRepositoryIndex
         case startDate
         case endDate
     }
@@ -30,12 +30,12 @@ final class UserSettings {
         }
     }
     
-    static var cellIndexPath: Int! {
+    static var currentRepositoryIndex: Int! {
         get {
-            return UserDefaults.standard.integer(forKey: KeysForDefaults.cellIndexPath.rawValue)
+            return UserDefaults.standard.integer(forKey: KeysForDefaults.currentRepositoryIndex.rawValue)
         } set {
             let defaults = UserDefaults.standard
-            let key = KeysForDefaults.cellIndexPath.rawValue
+            let key = KeysForDefaults.currentRepositoryIndex.rawValue
             if let indexPath = newValue {
                 defaults.set(indexPath, forKey: key)
             } else {

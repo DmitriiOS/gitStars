@@ -8,7 +8,7 @@
 import Foundation
 
 struct GitUserData: Decodable {
-    var gitLogin: String
-    var gitChosenRepo: String
+    let gitLogin: String
+    let gitChosenRepo: String
 }
 

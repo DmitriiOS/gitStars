@@ -9,5 +9,5 @@ import Foundation
 
 struct DatesAndStars {
     var dates: Date
-    var stars: Int = 0
+    var starsCount = 0
 }

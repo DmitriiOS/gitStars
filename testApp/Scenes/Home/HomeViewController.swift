@@ -44,7 +44,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         presenter.viewWillAppear()
         enterButtonActions()
         if defaultChartLoading && textField.text != "" {
-            currentRepositoryInfo = repositoriesInfo[UserSettings.cellIndexPath]
+            currentRepositoryInfo = repositoriesInfo[UserSettings.currentRepositoryIndex]
             presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo)
         }
         defaultChartLoading = false
@@ -72,8 +72,8 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     
     func enterButtonActions() {
         tableView.isHidden = false
-        UserSettings.currentLogin = textField.text ?? ""
-        currentRepositoryInfo.owner.login = textField.text ?? ""
+        UserSettings.currentLogin = textField.text!
+        currentRepositoryInfo.owner.login = textField.text!
         tableView.reloadData()
         presenter.loadRepositoriesFromDB(loginTyped: currentRepositoryInfo.owner.login)
         presenter.loadRepositoriesFromAPI(loginTyped: currentRepositoryInfo.owner.login)
@@ -99,7 +99,7 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UserSettings.cellIndexPath = indexPath.row
+        UserSettings.currentRepositoryIndex = indexPath.row
         currentRepositoryInfo = repositoriesInfo[indexPath.row]
         presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo)
     }

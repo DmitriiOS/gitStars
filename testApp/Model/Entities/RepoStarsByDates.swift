@@ -19,7 +19,7 @@ struct User: Decodable {
 
 extension RepoStarsByDates {
     init(gitStarDates: GithubStarDates) {
-        self.starredAt = gitStarDates.dates
+        self.starredAt = gitStarDates.date
         self.user = User(nodeId: gitStarDates.starDatesID)
     }
 }

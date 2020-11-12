@@ -37,7 +37,7 @@ final class StarDatesService: DateOptimizer {
         for x in 0..<datesAndStars.count {
             for i in 0..<datesDate.count {
                 if datesAndStars[x].dates == datesDate[i] {
-                    datesAndStars[x].stars += 1
+                    datesAndStars[x].starsCount += 1
                 }
             }
         }
