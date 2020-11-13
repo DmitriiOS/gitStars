@@ -43,8 +43,9 @@ class HomeViewController: UIViewController, HomeView, UITableViewDelegate, UITab
         myRepoStars = []
         presenter.viewWillAppear()
         enterButtonActions()
-        if defaultChartLoading && textField.text != "" {
-            currentRepositoryInfo = repositoriesInfo[UserSettings.currentRepositoryIndex]
+        if defaultChartLoading && textField.text != "",
+           let currentRepositoryIndex = UserSettings.currentRepositoryIndex {
+            currentRepositoryInfo = repositoriesInfo[currentRepositoryIndex]
             presenter.onRepoSelected(currentRepositoryInfo: currentRepositoryInfo)
         }
         defaultChartLoading = false

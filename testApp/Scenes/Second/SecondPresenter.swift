@@ -8,7 +8,7 @@
 
 import  Foundation
 
-protocol GetDataFromHomeVC: AnyObject {
+protocol StarsDataProvider: AnyObject {
     func getCurrentRepositoryInfo(currentRepositoryInfo: CurrentRepositoryInfo)
     func reloadRepoStars(_ starDates: [RepoStarsByDates])
     func whenAllDataIsReady()
@@ -21,7 +21,7 @@ protocol SecondView: AnyObject {
 }
 
 final class SecondPresenter {
-    private unowned var view: GetDataFromHomeVC
+    private unowned var dataProvider: StarsDataProvider
     private let navigator: SecondNavigator
     private let currentRepositoryInfo: CurrentRepositoryInfo
     private var gitStarService: GitStarService
@@ -30,12 +30,12 @@ final class SecondPresenter {
     
     // MARK: - Lifecycle
     
-    init(view: GetDataFromHomeVC,
+    init(view: StarsDataProvider,
          navigator: SecondNavigator,
          currentRepositoryInfo: CurrentRepositoryInfo,
          gitStarService: GitStarService,
          starDatesService: StarDatesService) {
-        self.view = view
+        self.dataProvider = view
         self.navigator = navigator
         self.currentRepositoryInfo = currentRepositoryInfo
         self.gitStarService = gitStarService
@@ -49,7 +49,7 @@ final class SecondPresenter {
         print("НАЧАЛО ВТОРОГО ЭКРАНА")
         reloadStarDatesFromDB()
         reloadStarDatesFromAPI()
-        view.getCurrentRepositoryInfo(currentRepositoryInfo: currentRepositoryInfo)
+        dataProvider.getCurrentRepositoryInfo(currentRepositoryInfo: currentRepositoryInfo)
     }
     
     // MARK: - Internal actions
@@ -80,9 +80,9 @@ final class SecondPresenter {
     
     private func showRepoStars(_ dates: [RepoStarsByDates]) {
         self.repoStarsByDates = dates
-        view.reloadRepoStars(dates)
-        view.whenAllDataIsReady()
-        view.activityIndicatorStop()
+        dataProvider.reloadRepoStars(dates)
+        dataProvider.whenAllDataIsReady()
+        dataProvider.activityIndicatorStop()
     }
     
     // Declare here actions and handlers for events of the View

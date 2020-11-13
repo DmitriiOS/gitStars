@@ -1,5 +1,5 @@
 //
-//  CurrentLogin.swift
+//  UserSettings.swift
 //  testApp
 //
 //  Created by Dmitriy Orlov on 11.11.2020.
@@ -16,7 +16,7 @@ final class UserSettings {
         case endDate
     }
     
-    static var currentLogin: String! {
+    static var currentLogin: String? {
         get {
             return UserDefaults.standard.string(forKey: KeysForDefaults.currentLogin.rawValue)
         } set {
@@ -30,9 +30,9 @@ final class UserSettings {
         }
     }
     
-    static var currentRepositoryIndex: Int! {
+    static var currentRepositoryIndex: Int? {
         get {
-            return UserDefaults.standard.integer(forKey: KeysForDefaults.currentRepositoryIndex.rawValue)
+            return UserDefaults.standard.object(forKey: KeysForDefaults.currentRepositoryIndex.rawValue) as? Int
         } set {
             let defaults = UserDefaults.standard
             let key = KeysForDefaults.currentRepositoryIndex.rawValue

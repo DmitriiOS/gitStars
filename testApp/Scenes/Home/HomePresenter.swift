@@ -25,9 +25,7 @@ final class HomePresenter {
     
     // MARK: - Lifecycle
     
-    init(view: HomeView,
-         navigator: HomeNavigator,
-         gitService: GitService) {
+    init(view: HomeView, navigator: HomeNavigator, gitService: GitService) {
         self.view = view
         self.navigator = navigator
         self.gitService = gitService

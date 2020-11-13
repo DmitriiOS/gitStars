@@ -62,10 +62,6 @@ struct GitStarService {
     
     // MARK: - Internal
     
-    //    func createRequest() {
-    //
-    //    }
-    
     func fetchStarDates(by repositoryId: String) -> [GithubStarDates]? {
         storage.getStarDates(by: repositoryId)
     }
@@ -87,8 +83,6 @@ struct GitStarService {
             if let err = error {
                 completion(.failure(err))
             } else if let data = data {
-                //                let httpResponse = response as! HTTPURLResponse
-                //                print("Next: \(httpResponse.allHeaderFields["Link"])")
                 completion(.success(data))
             } else {
                 completion(.failure(CommonError.noData))

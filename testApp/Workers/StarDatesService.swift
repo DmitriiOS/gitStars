@@ -22,10 +22,11 @@ final class StarDatesService: DateOptimizer {
         let calendar = Calendar.current
         for i in 0..<datesString.count {
             stringDate = datesString[i].starredAt
-            let date = dateFormatter.date(from: stringDate)
-            let components = calendar.dateComponents([.year, .month, .day], from: date!)
-            let finalDate = calendar.date(from: components)
-            datesDate.append(finalDate!)
+            if let date = dateFormatter.date(from: stringDate) {
+                let components = calendar.dateComponents([.year, .month, .day], from: date)
+                let finalDate = calendar.date(from: components)
+                datesDate.append(finalDate!)
+            }
         }
         
         var startDate = datesDate.first ?? Date()

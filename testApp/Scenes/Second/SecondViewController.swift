@@ -10,7 +10,7 @@ import UIKit
 import Charts
 import CalendarDateRangePickerViewController
 
-class SecondViewController: UIViewController, GetDataFromHomeVC, SecondView {
+class SecondViewController: UIViewController, StarsDataProvider, SecondView {
     var currentRepositoryId = ""
     var currentRepositoryName = ""
     var currentRepositoryOwnerLogin = ""
