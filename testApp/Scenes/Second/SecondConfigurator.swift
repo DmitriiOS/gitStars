@@ -32,7 +32,7 @@ final class SecondConfigurator {
         let storage = RealmStorage()
         let gitStarService = GitStarService(storage: storage)
         let starDatesService = StarDatesService()
-        vc.presenter = SecondPresenter(view: vc,
+        vc.secondPresenter = SecondPresenter(view: vc,
                                        navigator: navigator,
                                        currentRepositoryInfo: currentRepositoryInfo,
                                        gitStarService: gitStarService,

@@ -10,14 +10,14 @@ import UIKit
 import Charts
 import CalendarDateRangePickerViewController
 
-class SecondViewController: UIViewController, StarsDataProvider, SecondView {
+class SecondViewController: UIViewController, SecondView {
     var currentRepositoryId = ""
     var currentRepositoryName = ""
     var currentRepositoryOwnerLogin = ""
     var datesForChart: [String] = []
     var startDateDate = Date()
     var endDateDate = Date()
-    var presenter: SecondPresenter!
+    var secondPresenter: SecondPresenter!
     var starDatesService: StarDatesService!
     var datesAndStars: [DatesAndStars] = []
     private var myRepoStars: [RepoStarsByDates] = []
@@ -47,7 +47,7 @@ class SecondViewController: UIViewController, StarsDataProvider, SecondView {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         activityIndicatorStart()
-        presenter.viewWillAppear()
+        secondPresenter.viewWillAppear()
         showReceivedData(repo: currentRepositoryName, login: currentRepositoryOwnerLogin)
         getDatesForChart()
         barChartView.xAxis.enabled = true
@@ -123,7 +123,7 @@ class SecondViewController: UIViewController, StarsDataProvider, SecondView {
     func reloadRepoStars(_ myRepoStars: [RepoStarsByDates]) {
         self.myRepoStars = myRepoStars
         selectedDatesLabel.text = "Выберите даты для графика"
-        datesAndStars = presenter.starDatesService.dateOptimizer(myRepoStars)
+        datesAndStars = secondPresenter.starDatesService.dateOptimizer(myRepoStars)
     }
     
     func prepareData() {

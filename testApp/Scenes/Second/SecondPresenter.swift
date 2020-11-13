@@ -8,20 +8,16 @@
 
 import  Foundation
 
-protocol StarsDataProvider: AnyObject {
+protocol SecondView: AnyObject {
     func getCurrentRepositoryInfo(currentRepositoryInfo: CurrentRepositoryInfo)
+    func showReceivedData(repo receivedGitRepo: String, login receivedGitLogin: String)
     func reloadRepoStars(_ starDates: [RepoStarsByDates])
     func whenAllDataIsReady()
     func activityIndicatorStop()
 }
 
-protocol SecondView: AnyObject {
-    func showReceivedData(repo receivedGitRepo: String, login receivedGitLogin: String)
-    func reloadRepoStars(_ starDates: [RepoStarsByDates])
-}
-
 final class SecondPresenter {
-    private unowned var dataProvider: StarsDataProvider
+    private unowned var dataProvider: SecondView
     private let navigator: SecondNavigator
     private let currentRepositoryInfo: CurrentRepositoryInfo
     private var gitStarService: GitStarService
@@ -30,7 +26,7 @@ final class SecondPresenter {
     
     // MARK: - Lifecycle
     
-    init(view: StarsDataProvider,
+    init(view: SecondView,
          navigator: SecondNavigator,
          currentRepositoryInfo: CurrentRepositoryInfo,
          gitStarService: GitStarService,
